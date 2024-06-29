@@ -6,8 +6,10 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
     {
         #region Publics
 
+        public WheelController wheelController;
         private WheelSpinningState SpinningState { get; set; }
         private WheelIdleState IdleState { get; set; }
+        private WheelRewardState WheelRewardState { get; set; }
 
         #endregion
 
@@ -22,11 +24,12 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
         {
             SpinningState = new WheelSpinningState(this);
             IdleState = new WheelIdleState(this);
+            WheelRewardState = new WheelRewardState(this);
         }
 
         protected override void Setup()
         {
-            
         }
+        
     }
 }

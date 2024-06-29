@@ -15,7 +15,10 @@ namespace _Main.Scripts.UserInterface.Buttons.Abstract
         protected override void Register(bool isActive)
         {
             base.Register(isActive);
-            
+            if (isActive)
+                _button.onClick.AddListener(OnButtonClicked);
+            else
+                _button.onClick.RemoveListener(OnButtonClicked);
         }
 
         protected override void Setup()
@@ -25,8 +28,8 @@ namespace _Main.Scripts.UserInterface.Buttons.Abstract
 
         protected virtual void OnButtonClicked()
         {
-            
         }
+
         protected void SetInteractable(bool value)
         {
             _button.interactable = value;

@@ -1,3 +1,4 @@
+using _Main.Scripts.Signals;
 using _Main.Scripts.UserInterface.Buttons.Abstract;
 
 namespace _Main.Scripts.UserInterface.Buttons.Concrete
@@ -8,6 +9,12 @@ namespace _Main.Scripts.UserInterface.Buttons.Concrete
         {
             base.OnButtonClicked();
             
+        }
+
+        private void SpinAction()
+        {
+            SetInteractable(false);
+            GameSignals.OnSpinningButtonClicked?.Invoke();
         }
     }
 }

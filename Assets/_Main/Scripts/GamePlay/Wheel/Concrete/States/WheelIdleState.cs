@@ -10,7 +10,7 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
 
         public override void EnterState()
         {
-            
+            _context.wheelController.SetupWheelData(0);
         }
 
         public override void UpdateState()

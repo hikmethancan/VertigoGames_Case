@@ -1,5 +1,6 @@
 using _Main.Scripts.Base.MonoBehaviourBase;
 using _Main.Scripts.GamePlay.Wheel.Abstract;
+using _Main.Scripts.GamePlay.Wheel.Concrete.States;
 using _Main.Scripts.Signals;
 using _Main.Scripts.UserInterface.Buttons.Concrete;
 using UnityEngine;
@@ -13,7 +14,8 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
         [SerializeField] private SpinningButton spinButton;
 
 
-        private WheelAnimation _wheelAnimation;
+        private WheelAnimations _wheelAnimations;
+        private WheelStateManager _wheelStateManager;
         protected override void Setup()
         {
         }
@@ -29,6 +31,17 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
 
         private void BeginWheelSpinning()
         {
+            _wheelAnimations.SpinWheel();
+        }
+
+        public void SetupWheelData(int phaseIndex)
+        {
+            
+        }
+
+        public void SpinWheel()
+        {
+            
         }
     }
 }

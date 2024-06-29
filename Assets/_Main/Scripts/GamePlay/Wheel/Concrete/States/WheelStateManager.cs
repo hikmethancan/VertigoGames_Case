@@ -23,5 +23,10 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
             SpinningState = new WheelSpinningState(this);
             IdleState = new WheelIdleState(this);
         }
+
+        protected override void Setup()
+        {
+            
+        }
     }
 }

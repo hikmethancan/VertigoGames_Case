@@ -7,5 +7,9 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
     public class WheelController : Operator
     {
         [SerializeField] private WheelControllerSo wheelControllerSo;
+        protected override void Setup()
+        {
+            
+        }
     }
 }

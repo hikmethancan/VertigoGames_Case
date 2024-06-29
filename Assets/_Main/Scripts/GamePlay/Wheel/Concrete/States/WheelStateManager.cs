@@ -1,5 +1,4 @@
 using _Main.Scripts.StateMachine.Abstract;
-using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
 {

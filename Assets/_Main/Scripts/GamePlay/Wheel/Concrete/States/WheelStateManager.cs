@@ -1,4 +1,6 @@
+using System.Threading.Tasks;
 using _Main.Scripts.StateMachine.Abstract;
+using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
 {
@@ -6,7 +8,8 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
     {
         #region Publics
 
-        public WheelController wheelController;
+        public WheelController WheelController => _wheelController;
+        private WheelController _wheelController;
 
         #region States
 
@@ -20,10 +23,11 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
         #endregion
 
 
-        protected override void Start()
+        protected override async void Start()
         {
+            Setup();
+            _initialState = IdleState;
             base.Start();
-            SwitchState(IdleState);
         }
 
         protected override void InitializeStates()
@@ -36,7 +40,8 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
 
         protected override void Setup()
         {
-            TryGetComponent(out wheelController);
+            Debug.Log("Wheel State Aradama");
+            TryGetComponent(out _wheelController);
         }
     }
 }

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 540609721c4746249ab65e3bfd59972e, type: 3}
+  m_Name: BronzeWheelSo
+  m_EditorClassIdentifier: 
+  wheelType: 0
+  items:
+  - {fileID: 11400000, guid: fe0ddbcd782c5894cbf83a103b6f1d4c, type: 2}
+  - {fileID: 11400000, guid: 4b7c4b974d15c4d41998d86e4bb52936, type: 2}
+  - {fileID: 11400000, guid: e43d8ed10b8474b4fb91f1ac02cf80ac, type: 2}
+  - {fileID: 11400000, guid: 4c6156f1c9f327d4a93f016966b0c647, type: 2}

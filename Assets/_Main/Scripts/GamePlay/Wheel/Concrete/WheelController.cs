@@ -144,5 +144,14 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
             float y = Mathf.Sin(angleInRadians) * radius;
             return new Vector3(x, y, 0) + itemsSpawnParent.position;
         }
+
+
+        public void ChangeItemsForPhase()
+        {
+            foreach (var currentItem in _currentItems)
+            {
+                PoolManager.Instance.ItemPool.ReturnToPool(currentItem);
+            }
+        }
     }
 }

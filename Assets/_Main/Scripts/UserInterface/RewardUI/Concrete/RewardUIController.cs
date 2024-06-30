@@ -35,17 +35,26 @@ namespace _Main.Scripts.UserInterface.RewardUI.Concrete
 
             var item = PoolManager.Instance.ItemPool.Get();
             item.SetupItemData(tempItem.ItemData);
-            item.transform.SetParent(container);
-            item.transform.localScale = Vector3.one;
+            Transform itemTransform;
+            (itemTransform = item.transform).SetParent(container);
+            itemTransform.localScale = Vector3.one;
             item.gameObject.SetActive(true);
             var itemParticle = PoolManager.Instance.RewardedItemPool.Get();
             itemParticle.SetItem(item.ItemData.itemSprite);
-            itemParticle.transform.SetParent(container.parent.parent);
-            itemParticle.transform.localScale = Vector3.one;
-            itemParticle.transform.position = tempItem.transform.position;
+            Transform itemParticleTransform;
+            (itemParticleTransform = itemParticle.transform).SetParent(transform);
+            itemParticleTransform.localScale = Vector3.one;
+            itemParticle.RectTransform.position = tempItem.RectTransform.position;
             itemParticle.gameObject.SetActive(true);
-            itemParticle.transform.DOMove(item.transform.position, 3f).SetDelay(1f).SetEase(Ease.InBack);
-            GameSignals.OnReadyForSpinning?.Invoke();
+            itemParticle.RectTransform.DOMove(item.transform.position, 2f).SetEase(Ease.InBack);
+            if (CheckRewardedItemIsDeath(item)) return;
+            GameSignals.OnSwitchPhaseState?.Invoke();
+            GameSignals.OnItemRewardedFinish?.Invoke();
+        }
+
+        private bool CheckRewardedItemIsDeath(ItemBase item)
+        {
+            return item.ItemData.itemType == CardItemType.Death;
         }
     }
 }

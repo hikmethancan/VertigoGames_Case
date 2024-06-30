@@ -18,6 +18,12 @@ namespace _Main.Scripts.GamePlay.Item.Abstract
         public ItemSo ItemData => _itemSo;
         private ItemSo _itemSo;
 
+
+        public RectTransform RectTransform =>
+            _rectTransform ? _rectTransform : (_rectTransform = GetComponent<RectTransform>());
+
+        private RectTransform _rectTransform;
+
         protected override void Setup()
         {
         }

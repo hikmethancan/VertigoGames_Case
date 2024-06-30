@@ -1,6 +1,7 @@
 using _Main.Scripts.GamePlay.Wheel.Abstract;
 using _Main.Scripts.Signals;
 using _Main.Scripts.StateMachine.Abstract;
+using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
 {
@@ -12,6 +13,7 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
 
         public override void EnterState()
         {
+            Debug.Log("Idle State Entered");
             GameSignals.OnReadyForSpinning?.Invoke();
             _context.WheelController.SetupWheelData(WheelType.Bronze);
         }

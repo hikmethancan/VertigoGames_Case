@@ -1,7 +1,5 @@
-using System.Threading.Tasks;
 using _Main.Scripts.Signals;
 using _Main.Scripts.StateMachine.Abstract;
-using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
 {
@@ -31,17 +29,24 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
             {
                 GameSignals.OnSpinningButtonClicked += Spin;
                 GameSignals.OnItemRewardedFinish += SetupToNextPhase;
+                GameSignals.OnSwitchPhaseState += SwitchToPhaseState;
             }
             else
             {
                 GameSignals.OnSpinningButtonClicked -= Spin;
                 GameSignals.OnItemRewardedFinish -= SetupToNextPhase;
+                GameSignals.OnSwitchPhaseState -= SwitchToPhaseState;
             }
+        }
+
+        private void SwitchToPhaseState()
+        {
+            SwitchState(WheelPhaseChangingState);
         }
 
         private void SetupToNextPhase()
         {
-            
+            SwitchState(IdleState);
         }
 
         private void Spin()

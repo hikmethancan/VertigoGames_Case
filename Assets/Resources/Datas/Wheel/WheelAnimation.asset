@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34b453993abc4dde8138e3eff5233a6a, type: 3}
   m_Name: WheelAnimation
   m_EditorClassIdentifier: 
-  spinningDuration: 5
-  spinningAnimationEase: 26
+  spinningDuration: 2
+  spinningAnimationEase: 3
   spinningRotateMode: 1
-  spinningTourCount: 6
+  spinningTourCount: 2

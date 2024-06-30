@@ -1,5 +1,7 @@
 using System.Collections;
+using _Main.Scripts.Signals;
 using _Main.Scripts.StateMachine.Abstract;
+using DG.Tweening;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
@@ -33,7 +35,8 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
         {
             var gainedItemData = _context.WheelController.GetWheelItemSpinResulData();
             yield return _context.WheelController.WheelAnimations.SpinRoutine(gainedItemData);
-            Debug.Log($"Gained Item Data : Type : {gainedItemData.itemType} \n Count : {gainedItemData.itemCount}");
+            GameSignals.OnNewItemGained?.Invoke(gainedItemData.item);
+            gainedItemData.item.transform.DOScale(Vector3.one * 1.3f, 1f).SetLoops(4, LoopType.Yoyo);
         }
     }
 }

@@ -502,7 +502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
   m_OnCullStateChanged:
@@ -663,6 +663,7 @@ GameObject:
   m_Component:
   - component: {fileID: 503788090902256857}
   - component: {fileID: 7644690766512889839}
+  - component: {fileID: 700295173596010618}
   m_Layer: 5
   m_Name: ui_panel_rewards
   m_TagString: Untagged
@@ -701,3 +702,16 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7347489757586529161}
   m_CullTransparentMesh: 1
+--- !u!114 &700295173596010618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7347489757586529161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7db71458bb44593bd24096e8a57b98b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  container: {fileID: 3775029515011041479}

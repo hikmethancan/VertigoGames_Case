@@ -5,6 +5,7 @@ using _Main.Scripts.DISystem.Abstract;
 using _Main.Scripts.GamePlay.Item.Abstract;
 using _Main.Scripts.GamePlay.Wheel.Abstract;
 using _Main.Scripts.GamePlay.Wheel.Concrete.States;
+using _Main.Scripts.PoolSystem.Abstract;
 using _Main.Scripts.Signals;
 using _Main.Scripts.UserInterface.Buttons.Concrete;
 using NaughtyAttributes;
@@ -70,10 +71,6 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
             CreateNewItems();
         }
 
-        public void SpinWheel()
-        {
-        }
-
         public WheelSpinResultData GetWheelItemSpinResulData()
         {
             int totalPossibility = _currentItems.Sum(item => item.ItemData.spawnPossibility);
@@ -89,6 +86,7 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
                 {
                     return new WheelSpinResultData
                     {
+                        item = _currentItems[i],
                         itemType = item.itemType,
                         itemCount = item.ItemData.spawnCount,
                         index = i
@@ -99,29 +97,25 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
             return default(WheelSpinResultData);
         }
 
-        private void GetItem()
+        public ItemSo GetItem()
         {
-            // List<ItemSo> items = _currentPhaseSo.items;
-            //
-            // int totalPossibility = items.Sum(item => item.spawnPossibility);
-            //
-            // int randomValue = Random.Range(0, totalPossibility);
-            //
-            // int cumulativePossibility = 0;
-            // foreach (ItemSo item in items)
-            // {
-            //     cumulativePossibility += item.spawnPossibility;
-            //     if (randomValue < cumulativePossibility)
-            //     {
-            //         return new WheelSpinResultData
-            //         {
-            //             itemType = item.itemType,
-            //             itemCount = item.spawnCount
-            //         };
-            //     }
-            // }
-            //
-            // return default(WheelSpinResultData);
+            List<ItemSo> items = _currentPhaseSo.items;
+
+            int totalPossibility = items.Sum(item => item.spawnPossibility);
+
+            int randomValue = Random.Range(0, totalPossibility);
+
+            int cumulativePossibility = 0;
+            foreach (ItemSo item in items)
+            {
+                cumulativePossibility += item.spawnPossibility;
+                if (randomValue < cumulativePossibility)
+                {
+                    return item;
+                }
+            }
+
+            return default(ItemSo);
         }
 
         private void CreateNewItems()
@@ -132,11 +126,14 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
             {
                 float angle = i * angleStep;
                 Vector3 position = CalculateItemsSpawnPosition(angle, wheelSo.cardSpawnRadius);
-                var item = Instantiate(itemPrefab, position, Quaternion.identity, itemsSpawnParent);
-                var rnd = Random.Range(0, _currentPhaseSo.items.Count);
-                var itemSo = _currentPhaseSo.items[rnd];
-                item.SetupItemData(itemSo);
+                var item = PoolManager.Instance.ItemPool.Get();
+                Transform itemTransform;
+                (itemTransform = item.transform).SetParent(itemsSpawnParent);
+                itemTransform.position = position;
+                itemTransform.localScale = Vector3.one;
+                item.SetupItemData(GetItem());
                 _currentItems.Add(item);
+                item.gameObject.SetActive(true);
             }
         }
 

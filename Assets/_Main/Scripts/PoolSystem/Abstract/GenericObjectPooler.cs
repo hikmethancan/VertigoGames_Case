@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ObjPooler.Scripts
+namespace _Main.Scripts.PoolSystem.Abstract
 {
     public abstract class GenericObjectPooler<T> : MonoBehaviour where T : Component
     {

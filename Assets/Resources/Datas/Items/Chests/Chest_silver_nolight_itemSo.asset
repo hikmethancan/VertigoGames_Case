@@ -15,4 +15,4 @@ MonoBehaviour:
   itemSprite: {fileID: 21300000, guid: e8101e76bde5d6a45bb32e3038869f16, type: 3}
   itemType: 0
   spawnCount: 12
-  spawnPossibility: 0
+  spawnPossibility: 37

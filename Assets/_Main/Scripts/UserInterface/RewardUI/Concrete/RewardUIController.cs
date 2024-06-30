@@ -45,6 +45,7 @@ namespace _Main.Scripts.UserInterface.RewardUI.Concrete
             itemParticle.transform.position = tempItem.transform.position;
             itemParticle.gameObject.SetActive(true);
             itemParticle.transform.DOMove(item.transform.position, 3f).SetDelay(1f).SetEase(Ease.InBack);
+            GameSignals.OnReadyForSpinning?.Invoke();
         }
     }
 }

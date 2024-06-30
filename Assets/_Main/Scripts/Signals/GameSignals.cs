@@ -12,5 +12,6 @@ namespace _Main.Scripts.Signals
 
         // Items
         public static Action<ItemBase> OnNewItemGained;
+        public static Action OnItemRewardedFinish;
     }
 }

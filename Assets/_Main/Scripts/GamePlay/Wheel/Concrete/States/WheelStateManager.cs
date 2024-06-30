@@ -30,11 +30,18 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
             if (isActive)
             {
                 GameSignals.OnSpinningButtonClicked += Spin;
+                GameSignals.OnItemRewardedFinish += SetupToNextPhase;
             }
             else
             {
                 GameSignals.OnSpinningButtonClicked -= Spin;
+                GameSignals.OnItemRewardedFinish -= SetupToNextPhase;
             }
+        }
+
+        private void SetupToNextPhase()
+        {
+            
         }
 
         private void Spin()

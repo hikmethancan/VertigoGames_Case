@@ -40,7 +40,7 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
             var tourCount = _wheelAnimationSo.spinningTourCount;
             int segmentCount = _wheelController.WheelSo.howManyItemsWillSpawn;
             float anglePerSegment = 360f / segmentCount;
-            float itemAngle = 360f - anglePerSegment * wheelSpinResultData.index;
+            float itemAngle = 360f - anglePerSegment * wheelSpinResultData.index+90f;
             var tourAngle = tourCount * 360f;
             var targetRotateAngle = itemAngle + tourAngle;
             var wheelControllerTransform = _wheelController.transform;

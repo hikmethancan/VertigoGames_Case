@@ -1,4 +1,5 @@
 using _Main.Scripts.Base.MonoBehaviourBase;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,8 +25,15 @@ namespace _Main.Scripts.GamePlay.Item.Abstract
 
         private RectTransform _rectTransform;
 
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            PlaySpawnedAnimation();
+        }
+
         protected override void Setup()
         {
+            
         }
 
         public void SetupItemData(ItemSo itemSo)
@@ -33,6 +41,12 @@ namespace _Main.Scripts.GamePlay.Item.Abstract
             itemImage.sprite = itemSo.itemSprite;
             itemCountText.SetText($"{itemSo.spawnCount}");
             _itemSo = itemSo;
+        }
+
+        protected virtual void PlaySpawnedAnimation()
+        {
+            Debug.Log("scale");
+            transform.DOScale(Vector3.one * 1.3f, 0.3f).SetLoops(2, LoopType.Yoyo);
         }
     }
 }

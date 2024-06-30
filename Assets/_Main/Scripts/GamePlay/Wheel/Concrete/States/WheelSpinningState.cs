@@ -35,8 +35,8 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
         {
             var gainedItemData = _context.WheelController.GetWheelItemSpinResulData();
             yield return _context.WheelController.WheelAnimations.SpinRoutine(gainedItemData);
+            yield return new WaitForSeconds(1f);
             GameSignals.OnNewItemGained?.Invoke(gainedItemData.item);
-            gainedItemData.item.transform.DOScale(Vector3.one * 1.3f, 1f).SetLoops(4, LoopType.Yoyo);
         }
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using _Main.Scripts.Base.MonoBehaviourBase;
 using _Main.Scripts.DISystem.Abstract;
 using _Main.Scripts.GamePlay.Item.Abstract;
@@ -44,7 +45,7 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
 
         protected override void Setup()
         {
-            _wheelAnimations = new WheelAnimations(transform, wheelAnimationSo);
+            _wheelAnimations = new WheelAnimations(transform, wheelAnimationSo, this);
             TryGetComponent(out _wheelStateManager);
         }
 
@@ -71,6 +72,56 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
 
         public void SpinWheel()
         {
+        }
+
+        public WheelSpinResultData GetWheelItemSpinResulData()
+        {
+            int totalPossibility = _currentItems.Sum(item => item.ItemData.spawnPossibility);
+
+            int randomValue = Random.Range(0, totalPossibility);
+
+            int cumulativePossibility = 0;
+            for (var i = 0; i < _currentItems.Count; i++)
+            {
+                var item = _currentItems[i];
+                cumulativePossibility += item.ItemData.spawnPossibility;
+                if (randomValue < cumulativePossibility)
+                {
+                    return new WheelSpinResultData
+                    {
+                        itemType = item.itemType,
+                        itemCount = item.ItemData.spawnCount,
+                        index = i
+                    };
+                }
+            }
+
+            return default(WheelSpinResultData);
+        }
+
+        private void GetItem()
+        {
+            // List<ItemSo> items = _currentPhaseSo.items;
+            //
+            // int totalPossibility = items.Sum(item => item.spawnPossibility);
+            //
+            // int randomValue = Random.Range(0, totalPossibility);
+            //
+            // int cumulativePossibility = 0;
+            // foreach (ItemSo item in items)
+            // {
+            //     cumulativePossibility += item.spawnPossibility;
+            //     if (randomValue < cumulativePossibility)
+            //     {
+            //         return new WheelSpinResultData
+            //         {
+            //             itemType = item.itemType,
+            //             itemCount = item.spawnCount
+            //         };
+            //     }
+            // }
+            //
+            // return default(WheelSpinResultData);
         }
 
         private void CreateNewItems()

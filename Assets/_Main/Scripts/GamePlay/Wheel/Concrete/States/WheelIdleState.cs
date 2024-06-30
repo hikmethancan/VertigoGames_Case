@@ -1,4 +1,5 @@
 using _Main.Scripts.GamePlay.Wheel.Abstract;
+using _Main.Scripts.Signals;
 using _Main.Scripts.StateMachine.Abstract;
 
 namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
@@ -11,6 +12,7 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
 
         public override void EnterState()
         {
+            GameSignals.OnReadyForSpinning?.Invoke();
             _context.WheelController.SetupWheelData(WheelType.Bronze);
         }
 

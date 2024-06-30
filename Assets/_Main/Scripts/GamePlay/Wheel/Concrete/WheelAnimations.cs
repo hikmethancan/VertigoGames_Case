@@ -1,5 +1,7 @@
 using System.Collections;
 using _Main.Scripts.GamePlay.Wheel.Abstract;
+using _Main.Scripts.GamePlay.Wheel.Concrete.States;
+using DG.Tweening;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.Wheel.Concrete
@@ -15,10 +17,12 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
         #endregion
 
 
-        public WheelAnimations(Transform wheelTransform, WheelAnimationSo wheelAnimationSo)
+        public WheelAnimations(Transform wheelTransform, WheelAnimationSo wheelAnimationSo,
+            WheelController wheelController)
         {
             _wheelTransform = wheelTransform;
             _wheelAnimationSo = wheelAnimationSo;
+            _wheelController = wheelController;
         }
 
         public void SpinWheel()
@@ -29,29 +33,19 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
         {
         }
 
-        public IEnumerator SpinRoutine()
+        public IEnumerator SpinRoutine(WheelSpinResultData wheelSpinResultData)
         {
-            float duration = 2f;
-            float time = 0;
+            var tourCount = _wheelAnimationSo.spinningTourCount;
             int segmentCount = _wheelController.WheelSo.howManyItemsWillSpawn;
             float anglePerSegment = 360f / segmentCount;
-            float randomAngle = Random.Range(0, 360f);
+            float itemAngle = anglePerSegment * wheelSpinResultData.index;
+            var tourAngle = tourCount * 360f;
+            var targetRotateAngle = itemAngle + tourAngle;
             var wheelControllerTransform = _wheelController.transform;
-            float targetAngle = wheelControllerTransform.eulerAngles.z + 720f + randomAngle;
-
-            while (time < duration)
-            {
-                time += Time.deltaTime;
-                float angle = Mathf.Lerp(wheelControllerTransform.eulerAngles.z, targetAngle, time / duration);
-                wheelControllerTransform.eulerAngles = new Vector3(0, 0, angle);
-                yield return null;
-            }
-
-            float finalAngle = wheelControllerTransform.eulerAngles.z % 360f;
-            int finalSegmentIndex = (int)(finalAngle / anglePerSegment);
-            // _controller.HandleSegment(_controller.WheelSegments[finalSegmentIndex]);
-            //
-            // _controller.StateMachine.SetState(new IdleState(_controller));
+            yield return wheelControllerTransform
+                .DORotate(Vector3.forward * targetRotateAngle, _wheelAnimationSo.spinningDuration,
+                    _wheelAnimationSo.spinningRotateMode).SetEase(_wheelAnimationSo.spinningAnimationEase)
+                .WaitForCompletion();
         }
     }
 }

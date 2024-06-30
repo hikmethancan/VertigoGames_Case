@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.Wheel.Abstract
@@ -6,6 +7,8 @@ namespace _Main.Scripts.GamePlay.Wheel.Abstract
     public class WheelAnimationSo : ScriptableObject
     {
         [Header("Spinning Animation Data")] public float spinningDuration;
-        
+        public Ease spinningAnimationEase;
+        public RotateMode spinningRotateMode;
+        public int spinningTourCount;
     }
 }

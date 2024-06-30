@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace _Main.Scripts.Base.MonoBehaviourBase

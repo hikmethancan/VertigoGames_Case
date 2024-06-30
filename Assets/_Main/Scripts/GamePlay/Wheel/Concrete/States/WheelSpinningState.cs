@@ -1,5 +1,4 @@
 using System.Collections;
-using _Main.Scripts.Signals;
 using _Main.Scripts.StateMachine.Abstract;
 using UnityEngine;
 
@@ -15,8 +14,6 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
 
         public override void EnterState()
         {
-            Debug.Log("Spinning Entered");
-            GameSignals.OnReadyForSpinning?.Invoke();
             _spinningCoroutine = _context.WheelController.StartCoroutine(SpinRoutine());
         }
 
@@ -34,8 +31,9 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
 
         private IEnumerator SpinRoutine()
         {
-            yield return _context.WheelController.WheelAnimations.SpinRoutine();
-            
+            var gainedItemData = _context.WheelController.GetWheelItemSpinResulData();
+            yield return _context.WheelController.WheelAnimations.SpinRoutine(gainedItemData);
+            Debug.Log($"Gained Item Data : Type : {gainedItemData.itemType} \n Count : {gainedItemData.itemCount}");
         }
     }
 }

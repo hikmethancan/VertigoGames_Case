@@ -18,6 +18,7 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
         private WheelIdleState IdleState { get; set; }
         private WheelRewardState WheelRewardState { get; set; }
         private WheelPhaseChangingState WheelPhaseChangingState { get; set; }
+        private WheelGainItemState WheelGainItemState { get; set; }
 
         #endregion
 
@@ -54,6 +55,7 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
             IdleState = new WheelIdleState(this);
             WheelRewardState = new WheelRewardState(this);
             WheelPhaseChangingState = new WheelPhaseChangingState(this);
+            WheelGainItemState = new WheelGainItemState(this);
         }
 
         protected override void Setup()

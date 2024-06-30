@@ -15,6 +15,9 @@ namespace _Main.Scripts.GamePlay.Item.Abstract
 
         public CardItemType itemType;
 
+        public ItemSo ItemData => _itemSo;
+        private ItemSo _itemSo;
+
         protected override void Setup()
         {
         }
@@ -23,6 +26,7 @@ namespace _Main.Scripts.GamePlay.Item.Abstract
         {
             itemImage.sprite = itemSo.itemSprite;
             itemCountText.SetText($"{itemSo.spawnCount}");
+            _itemSo = itemSo;
         }
     }
 }

@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: WheelAnimation
   m_EditorClassIdentifier: 
   spinningDuration: 5
+  spinningAnimationEase: 26
+  spinningRotateMode: 1
+  spinningTourCount: 6

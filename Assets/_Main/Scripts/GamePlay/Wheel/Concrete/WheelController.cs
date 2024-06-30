@@ -32,7 +32,7 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
         [SerializeField] private ItemBase itemPrefab;
         [SerializeField] private Image wheelImage;
         [SerializeField] private Image indicatorImage;
-        [ShowAssetPreview] [SerializeField] private Transform itemsSpawnParent;
+        [ShowAssetPreview] [SerializeField] private RectTransform itemsSpawnParent;
 
         #endregion
 
@@ -157,7 +157,7 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
                 var item = PoolManager.Instance.ItemPool.Get();
                 Transform itemTransform;
                 (itemTransform = item.transform).SetParent(itemsSpawnParent);
-                itemTransform.position = position;
+                item.RectTransform.anchoredPosition = position;
                 itemTransform.localScale = Vector3.one;
                 item.SetupItemData(GetItem());
                 _currentItems.Add(item);
@@ -170,7 +170,7 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
             float angleInRadians = angle * Mathf.Deg2Rad;
             float x = Mathf.Cos(angleInRadians) * radius;
             float y = Mathf.Sin(angleInRadians) * radius;
-            return new Vector3(x, y, 0) + itemsSpawnParent.position;
+            return new Vector2(x, y) + itemsSpawnParent.anchoredPosition;
         }
 
 

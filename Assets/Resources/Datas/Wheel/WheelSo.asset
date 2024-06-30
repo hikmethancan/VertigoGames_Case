@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: WheelSo
   m_EditorClassIdentifier: 
   howManyItemsWillSpawn: 8
-  cardSpawnRadius: 180
+  cardSpawnRadius: 230

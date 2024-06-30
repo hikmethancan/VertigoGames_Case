@@ -17,5 +17,10 @@ namespace _Main.Scripts.UserInterface.PhaseUI.Concrete
             _level = level;
             phaseLevelText.SetText($"{level}");
         }
+
+        public void FadeText()
+        {
+            phaseLevelText.alpha = 0.1f;
+        }
     }
 }

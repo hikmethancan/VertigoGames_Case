@@ -48,6 +48,15 @@ namespace _Main.Scripts.UserInterface.PhaseUI.Concrete
         {
             var targetX = 600f - _currentPhaseLevel * phaseSo.phaseImageSpawnOffsetX;
             container.DOAnchorPosX(targetX, phaseSo.moveDuration).SetEase(phaseSo.moveEase);
+            ColorFadePassedLevelsText();
+        }
+
+        private void ColorFadePassedLevelsText()
+        {
+            for (int i = 0; i < _currentPhaseLevel-1; i++)
+            {
+                _currentPhases[i].FadeText();
+            }
         }
 
         private void SwitchPhase()

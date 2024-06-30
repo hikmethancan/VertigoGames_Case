@@ -1,7 +1,6 @@
 using System.Collections;
 using _Main.Scripts.Signals;
 using _Main.Scripts.StateMachine.Abstract;
-using DG.Tweening;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.Wheel.Concrete.States

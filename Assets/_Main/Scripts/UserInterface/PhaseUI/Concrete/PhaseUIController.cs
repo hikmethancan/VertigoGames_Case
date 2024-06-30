@@ -29,9 +29,6 @@ namespace _Main.Scripts.UserInterface.PhaseUI.Concrete
                 _currentPhases.Add(phaseUI);
             }
 
-            // var containerPosition = container.anchoredPosition;
-            // containerPosition = new Vector3(460f, 0);
-            // container.anchoredPosition = containerPosition;
             SortThePhaseAnimation();
         }
 
@@ -53,7 +50,7 @@ namespace _Main.Scripts.UserInterface.PhaseUI.Concrete
 
         private void ColorFadePassedLevelsText()
         {
-            for (int i = 0; i < _currentPhaseLevel-1; i++)
+            for (int i = 0; i < _currentPhaseLevel - 1; i++)
             {
                 _currentPhases[i].FadeText();
             }

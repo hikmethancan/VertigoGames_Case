@@ -33,7 +33,6 @@ namespace _Main.Scripts.GamePlay.Item.Abstract
 
         protected override void Setup()
         {
-            
         }
 
         public void SetupItemData(ItemSo itemSo)
@@ -45,7 +44,6 @@ namespace _Main.Scripts.GamePlay.Item.Abstract
 
         protected virtual void PlaySpawnedAnimation()
         {
-            Debug.Log("scale");
             transform.DOScale(Vector3.one * 1.3f, 0.3f).SetLoops(2, LoopType.Yoyo);
         }
     }

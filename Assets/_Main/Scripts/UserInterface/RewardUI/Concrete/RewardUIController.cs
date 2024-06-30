@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using _Main.Scripts.Base.MonoBehaviourBase;
 using _Main.Scripts.GamePlay.Item.Abstract;
+using _Main.Scripts.GamePlay.Item.Concrete;
 using _Main.Scripts.PoolSystem.Abstract;
 using _Main.Scripts.Signals;
 using _Main.Scripts.UserInterface.RewardUI.Abstract;
@@ -25,35 +27,52 @@ namespace _Main.Scripts.UserInterface.RewardUI.Concrete
         {
             base.Register(isActive);
             if (isActive)
-                GameSignals.OnNewItemGained += AddNewItem;
+                GameSignals.OnNewItemGained += AddItem;
             else
-                GameSignals.OnNewItemGained -= AddNewItem;
+                GameSignals.OnNewItemGained -= AddItem;
         }
 
-        private void AddNewItem(ItemBase tempItem)
+        private void AddItem(ItemBase itemBase)
         {
-            if (_rewardedItems.Any(x => x.name == tempItem.name)) return;
+            AddNewItem(itemBase);
+        }
 
-            var item = PoolManager.Instance.ItemPool.Get();
-            item.SetupItemData(tempItem.ItemData);
-            Transform itemTransform;
-            (itemTransform = item.transform).SetParent(container);
-            itemTransform.localScale = Vector3.one;
-            item.gameObject.SetActive(true);
-            var itemParticle = PoolManager.Instance.RewardedItemPool.Get();
-            itemParticle.SetItem(item.ItemData.itemSprite);
-            Transform itemParticleTransform;
-            (itemParticleTransform = itemParticle.transform).SetParent(transform);
-            itemParticleTransform.localScale = Vector3.one;
-            itemParticle.RectTransform.position = tempItem.RectTransform.position;
-            itemParticle.gameObject.SetActive(true);
-            itemParticle.RectTransform.DOMove(item.transform.position, rewardSo.moveDuration).SetEase(rewardSo.moveEase)
-                .OnComplete(() =>
-                {
-                    if (CheckRewardedItemIsDeath(item)) return;
-                    GameSignals.OnSwitchPhaseState?.Invoke();
-                    GameSignals.OnItemRewardedFinish?.Invoke();
-                });
+        private async Task AddNewItem(ItemBase tempItem)
+        {
+            ItemBase item = _rewardedItems.FirstOrDefault(x => x.name == tempItem.name);
+
+            if (item == null)
+            {
+                item = PoolManager.Instance.ItemPool.Get();
+                item.SetupItemData(tempItem.ItemData);
+                Transform itemTransform = item.transform;
+                itemTransform.SetParent(container);
+                itemTransform.localScale = Vector3.one;
+                item.gameObject.SetActive(true);
+                _rewardedItems.Add(item);
+            }
+
+            List<Task> moveTasks = new List<Task>();
+            for (int i = 0; i < rewardSo.rewardedItemsSpawnCount; i++)
+            {
+                var itemParticle = PoolManager.Instance.RewardedItemPool.Get();
+                itemParticle.SetItem(item.ItemData.itemSprite);
+                Transform itemParticleTransform = itemParticle.transform;
+                itemParticleTransform.SetParent(transform);
+                itemParticleTransform.localScale = Vector3.one;
+                itemParticle.RectTransform.anchoredPosition =
+                    tempItem.RectTransform.anchoredPosition + Random.insideUnitCircle * 10f;
+                itemParticle.gameObject.SetActive(true);
+                await itemParticle.MovementAsync(item.RectTransform.anchoredPosition);
+            }
+
+            // Check for Death item type
+            if (CheckRewardedItemIsDeath(item))
+                return;
+
+            // await Task.WhenAll(moveTasks);
+            GameSignals.OnSwitchPhaseState?.Invoke();
+            GameSignals.OnItemRewardedFinish?.Invoke();
         }
 
         private bool CheckRewardedItemIsDeath(ItemBase item)

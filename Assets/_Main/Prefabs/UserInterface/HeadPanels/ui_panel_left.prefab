@@ -715,3 +715,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   container: {fileID: 3775029515011041479}
+  rewardSo: {fileID: 11400000, guid: 0e96069f8d4474bebbd58b4c8b03a9b2, type: 2}

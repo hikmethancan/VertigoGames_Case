@@ -10,6 +10,7 @@ using _Main.Scripts.Signals;
 using _Main.Scripts.UserInterface.Buttons.Concrete;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace _Main.Scripts.GamePlay.Wheel.Concrete
 {
@@ -29,6 +30,8 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
         [SerializeField] private WheelAnimationSo wheelAnimationSo;
         [SerializeField] private SpinningButton spinButton;
         [SerializeField] private ItemBase itemPrefab;
+        [SerializeField] private Image wheelImage;
+        [SerializeField] private Image indicatorImage;
         [ShowAssetPreview] [SerializeField] private Transform itemsSpawnParent;
 
         #endregion
@@ -40,12 +43,14 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
         private WheelStateManager _wheelStateManager;
         private WheelPhaseSo _currentPhaseSo;
         private List<ItemBase> _currentItems = new();
+        private int _currentPhaseLevel;
 
         #endregion
 
 
         protected override void Setup()
         {
+            _currentPhaseLevel = 1;
             _wheelAnimations = new WheelAnimations(transform, wheelAnimationSo, this);
             TryGetComponent(out _wheelStateManager);
         }
@@ -54,9 +59,15 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
         {
             base.Register(isActive);
             if (isActive)
+            {
                 GameSignals.OnSpinningButtonClicked += BeginWheelSpinning;
+                GameSignals.OnSwitchPhaseState += IncreasePhaseLevel;
+            }
             else
+            {
                 GameSignals.OnSpinningButtonClicked -= BeginWheelSpinning;
+                GameSignals.OnSwitchPhaseState -= IncreasePhaseLevel;
+            }
         }
 
         private void BeginWheelSpinning()
@@ -64,10 +75,22 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
             _wheelAnimations.SpinWheel();
         }
 
-        public void SetupWheelData(WheelType wheelType)
+        private void IncreasePhaseLevel()
         {
+            if (_currentPhaseLevel == 30)
+                _currentPhaseLevel = 0;
+            _currentPhaseLevel++;
+        }
+
+        public void SetupWheelData()
+        {
+            WheelType wheelType = WheelType.Bronze;
+            if (_currentPhaseLevel == 5)
+                wheelType = WheelType.Silver;
             _currentPhaseSo = ScriptableObject.CreateInstance<WheelPhaseSo>();
             _currentPhaseSo = DIContainer.Instance.GetWheelPhaseData(wheelType);
+            wheelImage.sprite = _currentPhaseSo.wheelSprite;
+            indicatorImage.sprite = _currentPhaseSo.indicatorSprite;
             CreateNewItems();
         }
 
@@ -120,6 +143,11 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
 
         private void CreateNewItems()
         {
+            if (_currentItems.Count > 0)
+            {
+                ChangeItemsForPhase();
+            }
+
             _currentItems.Clear();
             float angleStep = 360f / 8;
             for (int i = 0; i < wheelSo.howManyItemsWillSpawn; i++)

@@ -16,12 +16,15 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
         #endregion
 
 
+        private WaitForSeconds _spinWaitDuration;
+
         public WheelAnimations(Transform wheelTransform, WheelAnimationSo wheelAnimationSo,
             WheelController wheelController)
         {
             _wheelTransform = wheelTransform;
             _wheelAnimationSo = wheelAnimationSo;
             _wheelController = wheelController;
+            _spinWaitDuration = new WaitForSeconds(wheelAnimationSo.spinningDuration);
         }
 
         public void SpinWheel()
@@ -41,10 +44,10 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
             var tourAngle = tourCount * 360f;
             var targetRotateAngle = itemAngle + tourAngle;
             var wheelControllerTransform = _wheelController.transform;
-            yield return wheelControllerTransform
+            wheelControllerTransform
                 .DORotate(Vector3.forward * targetRotateAngle, _wheelAnimationSo.spinningDuration,
-                    _wheelAnimationSo.spinningRotateMode).SetEase(_wheelAnimationSo.spinningAnimationEase)
-                .WaitForCompletion();
+                    _wheelAnimationSo.spinningRotateMode).SetEase(_wheelAnimationSo.spinningAnimationEase);
+            yield return _spinWaitDuration;
         }
     }
 }

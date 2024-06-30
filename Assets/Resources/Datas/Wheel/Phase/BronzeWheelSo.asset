@@ -13,9 +13,19 @@ MonoBehaviour:
   m_Name: BronzeWheelSo
   m_EditorClassIdentifier: 
   wheelSprite: {fileID: 21300000, guid: a82cc9e63cddf60418f78b7651996822, type: 3}
+  indicatorSprite: {fileID: 21300000, guid: 2d96949649f42fb4e8c6605cd2032dbd, type: 3}
   wheelType: 0
   items:
-  - {fileID: 11400000, guid: fe0ddbcd782c5894cbf83a103b6f1d4c, type: 2}
-  - {fileID: 11400000, guid: 4b7c4b974d15c4d41998d86e4bb52936, type: 2}
-  - {fileID: 11400000, guid: e43d8ed10b8474b4fb91f1ac02cf80ac, type: 2}
-  - {fileID: 11400000, guid: 4c6156f1c9f327d4a93f016966b0c647, type: 2}
+  - {fileID: 11400000, guid: 33d24d01166c84afb8e53be37766944a, type: 2}
+  - {fileID: 11400000, guid: 18a9697a88cfd49118ce770bd734adb9, type: 2}
+  - {fileID: 11400000, guid: 1770c08899613410d8d651dc7371974e, type: 2}
+  - {fileID: 11400000, guid: 8a0639880b2554b18acedbac4140a30b, type: 2}
+  - {fileID: 11400000, guid: a068ad65510e34d9da11fc5084be0436, type: 2}
+  - {fileID: 11400000, guid: f4c4796f3f5304b4e86c1747c343c631, type: 2}
+  - {fileID: 11400000, guid: 2ad8e58e294e34579b5a6ba308f1df62, type: 2}
+  - {fileID: 11400000, guid: 4767ab82edcee42edab638bce4534446, type: 2}
+  - {fileID: 11400000, guid: 8e231555597a44b669f46009d1bd16b2, type: 2}
+  - {fileID: 11400000, guid: 79634b7399e0647d4b8e4bebe206cdcb, type: 2}
+  - {fileID: 11400000, guid: 5ee28762e6ef3495b8432edc9c80eeae, type: 2}
+  - {fileID: 11400000, guid: ff2ea598152164d1daf22852d0e600c0, type: 2}
+  - {fileID: 11400000, guid: 2cf53c1c76d1745278420858a66ea090, type: 2}

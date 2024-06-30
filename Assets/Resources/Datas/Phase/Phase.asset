@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf1792750ebf423e884071a5242de8b7, type: 3}
   m_Name: Phase
   m_EditorClassIdentifier: 
-  phaseImageSpawnOffsetX: 0
+  phaseImageSpawnOffsetX: 140
+  moveDuration: 1
+  moveEase: 3

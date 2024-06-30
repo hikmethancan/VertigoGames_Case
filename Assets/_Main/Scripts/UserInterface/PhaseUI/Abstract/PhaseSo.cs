@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 namespace _Main.Scripts.UserInterface.PhaseUI.Abstract
@@ -6,5 +7,7 @@ namespace _Main.Scripts.UserInterface.PhaseUI.Abstract
     public class PhaseSo : ScriptableObject
     {
         public float phaseImageSpawnOffsetX;
+        [Header("Animation Values")] public float moveDuration;
+        public Ease moveEase;
     }
 }

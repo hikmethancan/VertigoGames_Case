@@ -4,6 +4,7 @@ using _Main.Scripts.Base.MonoBehaviourBase;
 using _Main.Scripts.GamePlay.Item.Abstract;
 using _Main.Scripts.PoolSystem.Abstract;
 using _Main.Scripts.Signals;
+using _Main.Scripts.UserInterface.RewardUI.Abstract;
 using DG.Tweening;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace _Main.Scripts.UserInterface.RewardUI.Concrete
     public class RewardUIController : Operator
     {
         [SerializeField] private Transform container;
-
+        [SerializeField] private RewardUISo rewardSo;
 
         private readonly List<ItemBase> _rewardedItems = new();
 
@@ -46,10 +47,13 @@ namespace _Main.Scripts.UserInterface.RewardUI.Concrete
             itemParticleTransform.localScale = Vector3.one;
             itemParticle.RectTransform.position = tempItem.RectTransform.position;
             itemParticle.gameObject.SetActive(true);
-            itemParticle.RectTransform.DOMove(item.transform.position, 2f).SetEase(Ease.InBack);
-            if (CheckRewardedItemIsDeath(item)) return;
-            GameSignals.OnSwitchPhaseState?.Invoke();
-            GameSignals.OnItemRewardedFinish?.Invoke();
+            itemParticle.RectTransform.DOMove(item.transform.position, rewardSo.moveDuration).SetEase(rewardSo.moveEase)
+                .OnComplete(() =>
+                {
+                    if (CheckRewardedItemIsDeath(item)) return;
+                    GameSignals.OnSwitchPhaseState?.Invoke();
+                    GameSignals.OnItemRewardedFinish?.Invoke();
+                });
         }
 
         private bool CheckRewardedItemIsDeath(ItemBase item)

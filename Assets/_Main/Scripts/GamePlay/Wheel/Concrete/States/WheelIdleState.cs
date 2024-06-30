@@ -13,9 +13,8 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
 
         public override void EnterState()
         {
-            Debug.Log("Idle State Entered");
             GameSignals.OnReadyForSpinning?.Invoke();
-            _context.WheelController.SetupWheelData(WheelType.Bronze);
+            _context.WheelController.SetupWheelData();
         }
 
         public override void UpdateState()

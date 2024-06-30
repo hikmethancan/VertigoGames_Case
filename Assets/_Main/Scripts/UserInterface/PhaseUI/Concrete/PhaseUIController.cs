@@ -3,13 +3,14 @@ using _Main.Scripts.Base.MonoBehaviourBase;
 using _Main.Scripts.PoolSystem.Abstract;
 using _Main.Scripts.Signals;
 using _Main.Scripts.UserInterface.PhaseUI.Abstract;
+using DG.Tweening;
 using UnityEngine;
 
 namespace _Main.Scripts.UserInterface.PhaseUI.Concrete
 {
     public class PhaseUIController : Operator
     {
-        [SerializeField] private Transform container;
+        [SerializeField] private RectTransform container;
         [SerializeField] private PhaseSo phaseSo;
 
         private List<PhaseUI> _currentPhases = new();
@@ -18,13 +19,20 @@ namespace _Main.Scripts.UserInterface.PhaseUI.Concrete
 
         protected override void Setup()
         {
+            _currentPhaseLevel = 1;
             for (int i = 0; i < 30; i++)
             {
                 var phaseUI = PoolManager.Instance.PhaseUIPool.Get();
                 phaseUI.SetPhaseData(i + 1);
                 phaseUI.transform.SetParent(container);
                 phaseUI.gameObject.SetActive(true);
+                _currentPhases.Add(phaseUI);
             }
+
+            // var containerPosition = container.anchoredPosition;
+            // containerPosition = new Vector3(460f, 0);
+            // container.anchoredPosition = containerPosition;
+            SortThePhaseAnimation();
         }
 
         protected override void Register(bool isActive)
@@ -36,8 +44,18 @@ namespace _Main.Scripts.UserInterface.PhaseUI.Concrete
                 GameSignals.OnSwitchPhaseState -= SwitchPhase;
         }
 
+        private void SortThePhaseAnimation()
+        {
+            var targetX = 600f - _currentPhaseLevel * phaseSo.phaseImageSpawnOffsetX;
+            container.DOAnchorPosX(targetX, phaseSo.moveDuration).SetEase(phaseSo.moveEase);
+        }
+
         private void SwitchPhase()
         {
+            if (_currentPhaseLevel == 30)
+                _currentPhaseLevel = 0;
+            _currentPhaseLevel++;
+            SortThePhaseAnimation();
         }
     }
 }

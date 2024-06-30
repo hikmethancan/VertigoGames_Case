@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: GoldWheelSo
   m_EditorClassIdentifier: 
   wheelSprite: {fileID: 21300000, guid: 9e9a76daba9c13c44a0dff8138f91012, type: 3}
+  indicatorSprite: {fileID: 21300000, guid: 78382ee337de10442a1cc573c53d6fae, type: 3}
   wheelType: 2
   items: []

@@ -9,6 +9,7 @@ namespace _Main.Scripts.GamePlay.Wheel.Abstract
     public class WheelPhaseSo : ScriptableObject
     {
         [ShowAssetPreview] public Sprite wheelSprite;
+        [ShowAssetPreview] public Sprite indicatorSprite;
         public WheelType wheelType;
         public List<ItemSo> items;
     }

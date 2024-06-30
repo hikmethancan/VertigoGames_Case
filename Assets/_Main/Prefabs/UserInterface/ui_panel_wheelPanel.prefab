@@ -170,6 +170,7 @@ MonoBehaviour:
   spinButton: {fileID: 7528938391246067674}
   itemPrefab: {fileID: -1523577397123887526, guid: 8ea4f5c8774b8e744a69aacdce34169d,
     type: 3}
+  wheelImage: {fileID: 7019160850756328390}
   itemsSpawnParent: {fileID: 8151118916413672514}
 --- !u!114 &5405233616060446663
 MonoBehaviour:

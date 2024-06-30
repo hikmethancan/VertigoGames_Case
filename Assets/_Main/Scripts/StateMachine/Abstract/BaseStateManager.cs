@@ -10,6 +10,7 @@ namespace _Main.Scripts.StateMachine.Abstract
         protected bool _isInitializeOnStart;
 
         [Header("Privates")] protected BaseState<T> _currentState;
+
         protected Transform _transform;
         protected BaseState<T> _initialState;
 

@@ -6,23 +6,45 @@ using _Main.Scripts.GamePlay.Wheel.Abstract;
 using _Main.Scripts.GamePlay.Wheel.Concrete.States;
 using _Main.Scripts.Signals;
 using _Main.Scripts.UserInterface.Buttons.Concrete;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.Wheel.Concrete
 {
     public class WheelController : Operator
     {
+        #region Publics
+
+        public WheelSo WheelSo => wheelSo;
+        public WheelAnimations WheelAnimations => _wheelAnimations;
+
+        #endregion
+
+
+        #region SerializeFields
+
+        [SerializeField] private WheelSo wheelSo;
         [SerializeField] private WheelAnimationSo wheelAnimationSo;
         [SerializeField] private SpinningButton spinButton;
         [SerializeField] private ItemBase itemPrefab;
+        [ShowAssetPreview] [SerializeField] private Transform itemsSpawnParent;
+
+        #endregion
+
+
+        #region Privates
 
         private WheelAnimations _wheelAnimations;
         private WheelStateManager _wheelStateManager;
         private WheelPhaseSo _currentPhaseSo;
-        private List<ItemBase> _currentItems = new List<ItemBase>();
+        private List<ItemBase> _currentItems = new();
+
+        #endregion
+
 
         protected override void Setup()
         {
+            _wheelAnimations = new WheelAnimations(transform, wheelAnimationSo);
             TryGetComponent(out _wheelStateManager);
         }
 
@@ -53,24 +75,26 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
 
         private void CreateNewItems()
         {
-            float angleStep = 360f / 8; 
-            for (int i = 0; i < 8; i++)
+            _currentItems.Clear();
+            float angleStep = 360f / 8;
+            for (int i = 0; i < wheelSo.howManyItemsWillSpawn; i++)
             {
                 float angle = i * angleStep;
-                Vector3 position = CalculatePosition(angle, 55);
-                var item = Instantiate(itemPrefab, position, Quaternion.identity, transform);
+                Vector3 position = CalculateItemsSpawnPosition(angle, wheelSo.cardSpawnRadius);
+                var item = Instantiate(itemPrefab, position, Quaternion.identity, itemsSpawnParent);
                 var rnd = Random.Range(0, _currentPhaseSo.items.Count);
                 var itemSo = _currentPhaseSo.items[rnd];
                 item.SetupItemData(itemSo);
+                _currentItems.Add(item);
             }
         }
 
-        Vector3 CalculatePosition(float angle, float radius)
+        Vector3 CalculateItemsSpawnPosition(float angle, float radius)
         {
             float angleInRadians = angle * Mathf.Deg2Rad;
             float x = Mathf.Cos(angleInRadians) * radius;
             float y = Mathf.Sin(angleInRadians) * radius;
-            return new Vector3(x, y, 0) + transform.position; 
+            return new Vector3(x, y, 0) + itemsSpawnParent.position;
         }
     }
 }

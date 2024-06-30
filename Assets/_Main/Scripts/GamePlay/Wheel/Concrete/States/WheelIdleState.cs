@@ -1,7 +1,5 @@
-using System.Threading.Tasks;
 using _Main.Scripts.GamePlay.Wheel.Abstract;
 using _Main.Scripts.StateMachine.Abstract;
-using UnityEngine;
 
 namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
 {
@@ -11,7 +9,7 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
         {
         }
 
-        public override async void EnterState()
+        public override void EnterState()
         {
             _context.WheelController.SetupWheelData(WheelType.Bronze);
         }

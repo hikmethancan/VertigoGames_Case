@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 540609721c4746249ab65e3bfd59972e, type: 3}
   m_Name: SilverWheelSo
   m_EditorClassIdentifier: 
+  wheelSprite: {fileID: 21300000, guid: 437fa4ce5fdb61844aa96b4c74ee2ef6, type: 3}
   wheelType: 1
   items: []

@@ -122,6 +122,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 581254650864546937}
+  - component: {fileID: 7720093117254008604}
+  - component: {fileID: 5405233616060446663}
   m_Layer: 5
   m_Name: ui_wheel
   m_TagString: Untagged
@@ -151,6 +153,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 800, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7720093117254008604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4192029069530666829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eadf593713cd4d3aa4e998504e4519b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wheelSo: {fileID: 11400000, guid: 733415577f203a043b41515e45911c1a, type: 2}
+  wheelAnimationSo: {fileID: 11400000, guid: e73d1ec09b99fc342846e050a4770d48, type: 2}
+  spinButton: {fileID: 7528938391246067674}
+  itemPrefab: {fileID: -1523577397123887526, guid: 8ea4f5c8774b8e744a69aacdce34169d,
+    type: 3}
+  itemsSpawnParent: {fileID: 8151118916413672514}
+--- !u!114 &5405233616060446663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4192029069530666829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae161f84031f67e4888aba3ed119e87a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isInitializeOnStart: 1
 --- !u!1 &4579987611932330788
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,8 +269,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7749089858857126131}
-  - component: {fileID: 8235192282432790671}
-  - component: {fileID: 1910947283272315790}
   m_Layer: 5
   m_Name: ui_panel_wheelPanel
   m_TagString: Untagged
@@ -268,34 +299,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1100, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8235192282432790671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5513570191865549519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eadf593713cd4d3aa4e998504e4519b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wheelAnimationSo: {fileID: 11400000, guid: e73d1ec09b99fc342846e050a4770d48, type: 2}
-  spinButton: {fileID: 7528938391246067674}
-  itemPrefab: {fileID: 0}
---- !u!114 &1910947283272315790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5513570191865549519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae161f84031f67e4888aba3ed119e87a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isInitializeOnStart: 1
 --- !u!1 &5987793337523326188
 GameObject:
   m_ObjectHideFlags: 0

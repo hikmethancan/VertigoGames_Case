@@ -1,5 +1,6 @@
 using _Main.Scripts.Signals;
 using _Main.Scripts.UserInterface.Buttons.Abstract;
+using UnityEngine;
 
 namespace _Main.Scripts.UserInterface.Buttons.Concrete
 {
@@ -7,12 +8,12 @@ namespace _Main.Scripts.UserInterface.Buttons.Concrete
     {
         protected override void OnButtonClicked()
         {
-            base.OnButtonClicked();
-            
+            SpinAction();
         }
 
         private void SpinAction()
         {
+            Debug.Log("Clicked");
             SetInteractable(false);
             GameSignals.OnSpinningButtonClicked?.Invoke();
         }

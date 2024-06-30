@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using _Main.Scripts.Signals;
 using _Main.Scripts.StateMachine.Abstract;
 using UnityEngine;
 
@@ -22,8 +23,25 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
 
         #endregion
 
+        protected override void Register(bool isActive)
+        {
+            base.Register(isActive);
+            if (isActive)
+            {
+                GameSignals.OnSpinningButtonClicked += Spin;
+            }
+            else
+            {
+                GameSignals.OnSpinningButtonClicked -= Spin;
+            }
+        }
 
-        protected override async void Start()
+        private void Spin()
+        {
+            SwitchState(SpinningState);
+        }
+
+        protected override void Start()
         {
             Setup();
             _initialState = IdleState;
@@ -40,7 +58,6 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
 
         protected override void Setup()
         {
-            Debug.Log("Wheel State Aradama");
             TryGetComponent(out _wheelController);
         }
     }

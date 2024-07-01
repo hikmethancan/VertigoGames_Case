@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using _Main.Scripts.Base.MonoBehaviourBase;
 using _Main.Scripts.GamePlay.Item.Abstract;
+using _Main.Scripts.PoolSystem.Abstract;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,7 +29,9 @@ namespace _Main.Scripts.GamePlay.Item.Concrete
         public async Task MovementAsync(Vector2 pos)
         {
             //TODO Burayi doldur hiko bey
-            await rectTransform.DOAnchorPos(pos, rewardedItemSo.moveDuration).SetEase(rewardedItemSo.moveEase)
+            await rectTransform.DOMove(pos, rewardedItemSo.moveDuration).SetEase(rewardedItemSo.moveEase)
+                .OnComplete(
+                    () => { PoolManager.Instance.RewardedItemPool.ReturnToPool(this); })
                 .AsyncWaitForCompletion();
         }
     }

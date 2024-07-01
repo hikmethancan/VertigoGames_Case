@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bf57cde1b054a92bc3cf099c34d4cf6, type: 3}
   m_Name: RewardedItemSo
   m_EditorClassIdentifier: 
-  moveDuration: 2
-  moveEase: 1
+  moveDuration: 0.5
+  moveEase: 26

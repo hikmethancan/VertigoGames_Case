@@ -12,10 +12,12 @@ namespace _Main.Scripts.Signals
 
         // Items
         public static Action<ItemBase> OnNewItemGained;
-
+        public static Action OnDeathState;
         public static Action OnItemRewardedFinish;
 
         // Phase
         public static Action OnSwitchPhaseState;
+        public static Action OnExitButtonActivate;
+
     }
 }

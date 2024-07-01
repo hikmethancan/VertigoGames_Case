@@ -7,27 +7,26 @@ namespace _Main.Scripts.UserInterface.Buttons.Concrete
     {
         protected override void OnButtonClicked()
         {
-            SpinAction();
+            ExitAction();
         }
 
         protected override void Register(bool isActive)
         {
             base.Register(isActive);
             if (isActive)
-                GameSignals.OnReadyForSpinning += ReadyForSpin;
+                GameSignals.OnExitButtonActivate += ReadyForExit;
             else
-                GameSignals.OnReadyForSpinning -= ReadyForSpin;
+                GameSignals.OnExitButtonActivate -= ReadyForExit;
         }
 
-        private void ReadyForSpin()
+        private void ReadyForExit()
         {
             SetInteractable(true);
         }
 
-        private void SpinAction()
+        private void ExitAction()
         {
             SetInteractable(false);
-            GameSignals.OnSpinningButtonClicked?.Invoke();
         }
     }
 }

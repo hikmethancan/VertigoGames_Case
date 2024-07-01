@@ -44,6 +44,7 @@ namespace _Main.Scripts.UserInterface.RewardUI.Concrete
             {
                 item = PoolManager.Instance.ItemPool.Get();
                 item.SetupItemData(tempItem.ItemData);
+                item.RewardedSetup();
                 Transform itemTransform = item.transform;
                 itemTransform.SetParent(container);
                 itemTransform.localScale = Vector3.one;
@@ -63,13 +64,17 @@ namespace _Main.Scripts.UserInterface.RewardUI.Concrete
                 Transform itemParticleTransform = itemParticle.transform;
                 itemParticleTransform.SetParent(transform);
                 itemParticleTransform.localScale = Vector3.one;
-                itemParticleTransform.position = tempItem.RectTransform.position +
-                                                 Random.insideUnitSphere * rewardSo.rewardItemsSpawnOffsetMultiplier;
+                var rndVector = Random.insideUnitSphere * rewardSo.rewardItemsSpawnOffsetMultiplier;
+                var tempItemPos = tempItem.RectTransform.position;
+                itemParticleTransform.position = tempItemPos +
+                                                 new Vector3(rndVector.x, rndVector.y,
+                                                     tempItemPos.z);
                 itemParticle.gameObject.SetActive(true);
                 moveTasks.Add(itemParticle.MovementAsync(item.RectTransform.position));
             }
 
             await Task.WhenAll(moveTasks);
+            item.IncreaseItemCount(tempItem.ItemData.spawnCount);
             GameSignals.OnSwitchPhaseState?.Invoke();
             GameSignals.OnItemRewardedFinish?.Invoke();
         }

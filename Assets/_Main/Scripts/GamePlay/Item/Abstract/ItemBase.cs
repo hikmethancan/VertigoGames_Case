@@ -25,6 +25,8 @@ namespace _Main.Scripts.GamePlay.Item.Abstract
 
         private RectTransform _rectTransform;
 
+        private int _count;
+
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -38,8 +40,26 @@ namespace _Main.Scripts.GamePlay.Item.Abstract
         public void SetupItemData(ItemSo itemSo)
         {
             itemImage.sprite = itemSo.itemSprite;
-            itemCountText.SetText($"{itemSo.spawnCount}");
+            _count = itemSo.spawnCount;
             _itemSo = itemSo;
+            SetItemCountText();
+        }
+
+        private void SetItemCountText()
+        {
+            itemCountText.SetText($"{_count}");
+        }
+
+        public void RewardedSetup()
+        {
+            _count = 0;
+            SetItemCountText();
+        }
+
+        public void IncreaseItemCount(int increaseCount)
+        {
+            _count += increaseCount;
+            SetItemCountText();
         }
 
         protected virtual void PlaySpawnedAnimation()

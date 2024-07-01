@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40723cd39edb402ab56adb1f44bf14f8, type: 3}
   m_Name: RewardUISo
   m_EditorClassIdentifier: 
-  rewardItemsSpawnOffsetMultiplier: 80
+  rewardItemsSpawnOffsetMultiplier: 200
   rewardedItemsSpawnCount: 5
   moveDuration: 2
   moveEase: 27

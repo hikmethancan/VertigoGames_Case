@@ -5,16 +5,18 @@ using _Main.Scripts.Signals;
 using _Main.Scripts.UserInterface.PhaseUI.Abstract;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace _Main.Scripts.UserInterface.PhaseUI.Concrete
 {
     public class PhaseUIController : Operator
     {
         [SerializeField] private RectTransform container;
-        [SerializeField] private PhaseSo phaseSo;
+        [SerializeField] private PhaseAnimationSo phaseAnimationSo;
+        [SerializeField] private PhaseReferencesSo phaseReferencesSo;
+        [SerializeField] private Image currentPhaseBgImage;
 
-        private List<PhaseUI> _currentPhases = new();
-
+        private readonly List<PhaseUI> _currentPhases = new();
         private int _currentPhaseLevel;
 
         protected override void Setup()
@@ -43,8 +45,8 @@ namespace _Main.Scripts.UserInterface.PhaseUI.Concrete
 
         private void SortThePhaseAnimation()
         {
-            var targetX = 600f - _currentPhaseLevel * phaseSo.phaseImageSpawnOffsetX;
-            container.DOAnchorPosX(targetX, phaseSo.moveDuration).SetEase(phaseSo.moveEase);
+            var targetX = 600f - _currentPhaseLevel * phaseAnimationSo.phaseImageSpawnOffsetX;
+            container.DOAnchorPosX(targetX, phaseAnimationSo.moveDuration).SetEase(phaseAnimationSo.moveEase);
             ColorFadePassedLevelsText();
         }
 
@@ -62,6 +64,17 @@ namespace _Main.Scripts.UserInterface.PhaseUI.Concrete
                 _currentPhaseLevel = 0;
             _currentPhaseLevel++;
             SortThePhaseAnimation();
+            CheckPhaseStates();
+        }
+
+        private void CheckPhaseStates()
+        {
+            currentPhaseBgImage.sprite = _currentPhaseLevel switch
+            {
+                5 => phaseReferencesSo.silverLevelSprite,
+                30 => phaseReferencesSo.superZoneLevelSprite,
+                _ => phaseReferencesSo.bronzeLevelSprite
+            };
         }
     }
 }

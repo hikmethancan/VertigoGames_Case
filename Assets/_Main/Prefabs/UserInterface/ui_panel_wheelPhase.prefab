@@ -145,7 +145,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   container: {fileID: 2873789170726397779}
-  phaseSo: {fileID: 11400000, guid: ad25604d450a0fe4ab59666c7b922550, type: 2}
+  phaseAnimationSo: {fileID: 11400000, guid: ad25604d450a0fe4ab59666c7b922550, type: 2}
+  phaseReferencesSo: {fileID: 11400000, guid: 1ecbbb303ecce481aacb347c1fa49fb7, type: 2}
+  currentPhaseBgImage: {fileID: 225238074740087933}
 --- !u!1 &3183112790986418083
 GameObject:
   m_ObjectHideFlags: 0

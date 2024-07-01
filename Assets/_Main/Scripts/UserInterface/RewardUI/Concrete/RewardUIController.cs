@@ -38,6 +38,12 @@ namespace _Main.Scripts.UserInterface.RewardUI.Concrete
 
         private async Task AddNewItem(ItemBase tempItem)
         {
+            if (CheckRewardedItemIsDeath(tempItem)) // Check for Death item type
+            {
+                GameSignals.OnDeathState?.Invoke();
+                return;
+            }
+
             ItemBase item = _rewardedItems.FirstOrDefault(x => x.ItemData.name == tempItem.ItemData.name);
 
             if (item == null)
@@ -52,8 +58,7 @@ namespace _Main.Scripts.UserInterface.RewardUI.Concrete
                 _rewardedItems.Add(item);
             }
 
-            if (CheckRewardedItemIsDeath(item)) // Check for Death item type
-                return;
+
             await Task.Delay(10); // Small delay to simulate asynchronous operation
 
             List<Task> moveTasks = new List<Task>();

@@ -13,13 +13,16 @@ namespace _Main.Scripts.UserInterface.DeathPanel.Concrete
         [SerializeField] private DeathPanelSo deathPanelSo;
         [SerializeField] private TMP_Text coinAmountText;
         [SerializeField] private ContinueGameButton continueGameButton;
-        
+        [SerializeField] private CanvasGroup canvasGroup;
 
         private int _coinAmount;
 
+
         protected override void Setup()
         {
+            transform.localScale = Vector3.zero;
             _coinAmount = deathPanelSo.coinAmount;
+            continueGameButton.SetCost(_coinAmount);
             SetCoinAmountText();
         }
 
@@ -32,13 +35,26 @@ namespace _Main.Scripts.UserInterface.DeathPanel.Concrete
         {
             base.Register(isActive);
             if (isActive)
+            {
                 GameSignals.OnDeathState += DeathState;
+                GameSignals.OnContinueButtonClicked += DeActivate;
+            }
             else
+            {
                 GameSignals.OnDeathState -= DeathState;
+                GameSignals.OnContinueButtonClicked -= DeActivate;
+            }
+        }
+
+        private void DeActivate()
+        {
+            canvasGroup.interactable = false;
+            deathPanel.DOScale(Vector3.zero, deathPanelSo.scaleDuration).SetEase(deathPanelSo.scaleEase);
         }
 
         private void DeathState()
         {
+            canvasGroup.interactable = true;
             deathPanel.DOScale(Vector3.one, deathPanelSo.scaleDuration).SetEase(deathPanelSo.scaleEase);
         }
     }

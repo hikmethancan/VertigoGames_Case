@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4609704913430090820}
   - component: {fileID: 1412574274691210216}
   - component: {fileID: 8628029088773350986}
+  - component: {fileID: 4285534456322979649}
   m_Layer: 5
   m_Name: ui_button_retry
   m_TagString: Untagged
@@ -122,6 +123,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4285534456322979649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113128036870945280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e02eca3472c341f7bb0888ed66919f41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &198473455245935383
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,6 +280,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7456890157978429418}
   - component: {fileID: 6041769102179761439}
+  - component: {fileID: 1786221369082170658}
   m_Layer: 5
   m_Name: ui_panel_DeathPanel
   m_TagString: Untagged
@@ -283,7 +297,7 @@ RectTransform:
   m_GameObject: {fileID: 834161721282806037}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2577466147424583165}
@@ -312,9 +326,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathPanel: {fileID: 7456890157978429418}
-  deathPanelSo: {fileID: 0}
+  deathPanelSo: {fileID: 11400000, guid: fa03e52982acc44a59dc127ba51ddb12, type: 2}
   coinAmountText: {fileID: 7098584953328822531}
   continueGameButton: {fileID: 228443954385076692}
+  canvasGroup: {fileID: 1786221369082170658}
+--- !u!225 &1786221369082170658
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 834161721282806037}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1111419078335430961
 GameObject:
   m_ObjectHideFlags: 0

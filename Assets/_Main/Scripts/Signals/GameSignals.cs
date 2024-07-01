@@ -18,6 +18,11 @@ namespace _Main.Scripts.Signals
         // Phase
         public static Action OnSwitchPhaseState;
         public static Action OnExitButtonActivate;
+        
+        // Button Events
+        public static Action OnContinueButtonClicked;
+        public static Action OnRetryButtonClicked;
+        public static Action OnSetCoinAmount;
 
     }
 }

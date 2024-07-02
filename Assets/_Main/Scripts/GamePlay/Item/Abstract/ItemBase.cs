@@ -26,6 +26,7 @@ namespace _Main.Scripts.GamePlay.Item.Abstract
         private RectTransform _rectTransform;
 
         private int _count;
+        private int _currentCount;
 
         protected override void OnEnable()
         {
@@ -58,7 +59,8 @@ namespace _Main.Scripts.GamePlay.Item.Abstract
 
         public void IncreaseItemCount(int increaseCount)
         {
-            _count += increaseCount;
+            var targetCount = _count + increaseCount;
+            DOVirtual.Int(_count, targetCount, 0.5f, x => itemCountText.SetText($"{x}"));
             SetItemCountText();
         }
 

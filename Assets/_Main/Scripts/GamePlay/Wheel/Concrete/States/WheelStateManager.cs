@@ -14,9 +14,6 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
 
         private WheelSpinningState SpinningState { get; set; }
         private WheelIdleState IdleState { get; set; }
-        private WheelRewardState WheelRewardState { get; set; }
-        private WheelPhaseChangingState WheelPhaseChangingState { get; set; }
-        private WheelGainItemState WheelGainItemState { get; set; }
 
         #endregion
 
@@ -29,20 +26,14 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
             {
                 GameSignals.OnSpinningButtonClicked += Spin;
                 GameSignals.OnItemRewardedFinish += SetupToNextPhase;
-                GameSignals.OnSwitchPhaseState += SwitchToPhaseState;
             }
             else
             {
                 GameSignals.OnSpinningButtonClicked -= Spin;
                 GameSignals.OnItemRewardedFinish -= SetupToNextPhase;
-                GameSignals.OnSwitchPhaseState -= SwitchToPhaseState;
             }
         }
-
-        private void SwitchToPhaseState()
-        {
-            SwitchState(WheelPhaseChangingState);
-        }
+        
 
         private void SetupToNextPhase()
         {
@@ -65,9 +56,6 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
         {
             SpinningState = new WheelSpinningState(this);
             IdleState = new WheelIdleState(this);
-            WheelRewardState = new WheelRewardState(this);
-            WheelPhaseChangingState = new WheelPhaseChangingState(this);
-            WheelGainItemState = new WheelGainItemState(this);
         }
 
         protected override void Setup()

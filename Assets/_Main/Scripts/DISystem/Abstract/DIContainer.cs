@@ -10,6 +10,7 @@ namespace _Main.Scripts.DISystem.Abstract
 
         private void Awake()
         {
+            Application.targetFrameRate = 60;
             LoadScriptableObjectsFromResources();
         }
 

@@ -7,8 +7,18 @@ namespace _Main.Scripts.GamePlay.Item.Abstract
     public class ItemSo : ScriptableObject
     {
         [ShowAssetPreview] public Sprite itemSprite;
-        public CardItemType itemType;
-        public int spawnCount;
+        [Space(10f)] public CardItemType itemType;
+
+        [ShowIf("itemType", CardItemType.Chest)]
+        public ChestType chestType;
+
+        [ShowIf("itemType", CardItemType.Weapon)]
+        public WeaponType weaponType;
+
+        [ShowIf("itemType", CardItemType.Point)]
+        public PointType pointerType;
+
+        [Space(10f)] public int spawnCount;
         [Range(0, 100)] public int spawnPossibility;
     }
 }

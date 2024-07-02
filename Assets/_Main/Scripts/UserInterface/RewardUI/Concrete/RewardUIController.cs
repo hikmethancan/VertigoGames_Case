@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using _Main.Scripts.Base.MonoBehaviourBase;
+using _Main.Scripts.DataSystem.Concrete;
 using _Main.Scripts.GamePlay.Item.Abstract;
 using _Main.Scripts.PoolSystem.Abstract;
 using _Main.Scripts.Signals;
@@ -39,6 +40,10 @@ namespace _Main.Scripts.UserInterface.RewardUI.Concrete
 
         private void CollectItems()
         {
+            var check = _rewardedItems.Any(x => x.ItemData.itemType == CardItemType.Gold);
+            if (!check) return;
+            var gold = _rewardedItems.FirstOrDefault(x => x.ItemData.itemType == CardItemType.Gold)!;
+            DataManager.Money += gold.RewardRewardCount;
         }
 
         private async void AddItem(ItemBase itemBase)

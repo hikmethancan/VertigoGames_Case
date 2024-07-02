@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 5f61a0229e9e6704cbad75974ed990f6, type: 3}
   itemType: 2
+  chestType: 0
+  weaponType: 0
+  pointerType: 0
   spawnCount: 1
-  spawnPossibility: 37
+  spawnPossibility: 10

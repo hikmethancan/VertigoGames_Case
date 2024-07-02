@@ -14,8 +14,6 @@ namespace _Main.Scripts.GamePlay.Item.Abstract
         [SerializeField] private TMP_Text itemCountText;
 
 
-        public CardItemType itemType;
-
         public ItemSo ItemData => _itemSo;
         private ItemSo _itemSo;
 
@@ -26,7 +24,7 @@ namespace _Main.Scripts.GamePlay.Item.Abstract
         private RectTransform _rectTransform;
 
         private int _count;
-        private int _currentCount;
+        public int RewardRewardCount => _count;
 
         protected override void OnEnable()
         {
@@ -60,8 +58,11 @@ namespace _Main.Scripts.GamePlay.Item.Abstract
         public void IncreaseItemCount(int increaseCount)
         {
             var targetCount = _count + increaseCount;
-            DOVirtual.Int(_count, targetCount, 0.5f, x => itemCountText.SetText($"{x}"));
-            SetItemCountText();
+            DOVirtual.Int(_count, targetCount, 0.5f, x =>
+            {
+                itemCountText.SetText($"{x}");
+                _count = x;
+            });
         }
 
         protected virtual void PlaySpawnedAnimation()

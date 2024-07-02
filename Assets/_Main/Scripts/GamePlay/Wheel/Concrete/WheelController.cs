@@ -110,7 +110,7 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
                     return new WheelSpinResultData
                     {
                         item = _currentItems[i],
-                        itemType = item.itemType,
+                        itemType = item.ItemData.itemType,
                         itemCount = item.ItemData.spawnCount,
                         index = i
                     };
@@ -120,7 +120,7 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
             return default(WheelSpinResultData);
         }
 
-        public ItemSo GetItem()
+        private ItemSo GetItem()
         {
             List<ItemSo> items = _currentPhaseSo.items;
 

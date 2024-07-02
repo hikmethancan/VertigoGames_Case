@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Chest_big_nolight_itemSo
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 05bd8ead794982547a9af80947af64b4, type: 3}
-  itemType: 0
+  itemType: 3
+  chestType: 0
+  weaponType: 0
+  pointerType: 0
   spawnCount: 3
   spawnPossibility: 19

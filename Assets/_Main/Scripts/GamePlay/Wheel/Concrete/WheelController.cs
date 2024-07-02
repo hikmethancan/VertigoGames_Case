@@ -158,6 +158,7 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
                 Transform itemTransform;
                 (itemTransform = item.transform).SetParent(itemsSpawnParent);
                 item.RectTransform.anchoredPosition = position;
+                itemTransform.localEulerAngles = Vector3.forward * (angle-90f);
                 itemTransform.localScale = Vector3.one;
                 item.SetupItemData(GetItem());
                 _currentItems.Add(item);
@@ -174,7 +175,7 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
         }
 
 
-        public void ChangeItemsForPhase()
+        private void ChangeItemsForPhase()
         {
             foreach (var currentItem in _currentItems)
             {

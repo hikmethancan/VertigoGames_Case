@@ -26,6 +26,7 @@ namespace _Main.Scripts.UserInterface.Buttons.Concrete
 
         private void SpinAction()
         {
+            GameSignals.OnExitButtonActivate?.Invoke(false);
             SetInteractable(false);
             GameSignals.OnSpinningButtonClicked?.Invoke();
         }

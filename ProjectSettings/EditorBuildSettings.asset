@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/UrpFolder/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/_Main/Scenes/MainMenuScene.unity
+    guid: 20065bc894d334d1d978035f03616924
+  - enabled: 1
+    path: Assets/_Main/Scenes/WheelOfFortuneScene.unity
+    guid: bdea8b08007644f4883429ab024f9cf9
   m_configObjects: {}

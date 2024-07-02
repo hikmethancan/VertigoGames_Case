@@ -7,7 +7,6 @@ namespace _Main.Scripts.Signals
     {
         //Spinning
         public static Action OnSpinningButtonClicked;
-        public static Action OnSpinningAnimationEnded;
         public static Action OnReadyForSpinning;
 
         // Items
@@ -17,12 +16,11 @@ namespace _Main.Scripts.Signals
 
         // Phase
         public static Action OnSwitchPhaseState;
-        public static Action OnExitButtonActivate;
-        
+        public static Action<bool> OnExitButtonActivate;
+
         // Button Events
         public static Action OnContinueButtonClicked;
-        public static Action OnRetryButtonClicked;
         public static Action OnSetCoinAmount;
-
+        public static Action OnExitTheGame;
     }
 }

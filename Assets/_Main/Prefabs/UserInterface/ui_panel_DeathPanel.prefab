@@ -327,6 +327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deathPanel: {fileID: 7456890157978429418}
   deathPanelSo: {fileID: 11400000, guid: fa03e52982acc44a59dc127ba51ddb12, type: 2}
+  deathText: {fileID: 1855938754125978532}
   coinAmountText: {fileID: 7098584953328822531}
   continueGameButton: {fileID: 228443954385076692}
   canvasGroup: {fileID: 1786221369082170658}

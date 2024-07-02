@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18fe8078c4c84d4e9adb1441524d9718, type: 3}
-  m_Name: DeathPanelSo
+  m_Script: {fileID: 11500000, guid: 8952365c860547d0b3bf4e65e5ea63f0, type: 3}
+  m_Name: ExitButton
   m_EditorClassIdentifier: 
-  deathText: OH NO, A BOMB EXPLODED RIGHT IN YOUR HANDS!
-  scaleDuration: 1
-  scaleEase: 27
-  coinAmount: 300
+  scaleDuration: 0.5
+  scaleUpEase: 27
+  scaleDownEase: 26

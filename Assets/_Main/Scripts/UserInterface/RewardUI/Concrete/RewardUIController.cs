@@ -26,9 +26,19 @@ namespace _Main.Scripts.UserInterface.RewardUI.Concrete
         {
             base.Register(isActive);
             if (isActive)
+            {
                 GameSignals.OnNewItemGained += AddItem;
+                GameSignals.OnExitTheGame += CollectItems;
+            }
             else
+            {
                 GameSignals.OnNewItemGained -= AddItem;
+                GameSignals.OnExitTheGame -= CollectItems;
+            }
+        }
+
+        private void CollectItems()
+        {
         }
 
         private async void AddItem(ItemBase itemBase)

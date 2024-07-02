@@ -1,3 +1,4 @@
+using _Main.Scripts.SceneSystem.Concrete;
 using _Main.Scripts.Signals;
 using _Main.Scripts.UserInterface.Buttons.Abstract;
 using UnityEngine;
@@ -21,8 +22,7 @@ namespace _Main.Scripts.UserInterface.DeathPanel.Concrete
 
         private void Retry()
         {
-            Debug.Log("Retry Action");
-            GameSignals.OnRetryButtonClicked?.Invoke();
+            SceneHandler.LoadGameScene();
         }
     }
 }

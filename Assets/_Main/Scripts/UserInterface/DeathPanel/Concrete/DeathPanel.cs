@@ -11,6 +11,7 @@ namespace _Main.Scripts.UserInterface.DeathPanel.Concrete
     {
         [SerializeField] private Transform deathPanel;
         [SerializeField] private DeathPanelSo deathPanelSo;
+        [SerializeField] private TMP_Text deathText;
         [SerializeField] private TMP_Text coinAmountText;
         [SerializeField] private ContinueGameButton continueGameButton;
         [SerializeField] private CanvasGroup canvasGroup;
@@ -24,6 +25,7 @@ namespace _Main.Scripts.UserInterface.DeathPanel.Concrete
             _coinAmount = deathPanelSo.coinAmount;
             continueGameButton.SetCost(_coinAmount);
             SetCoinAmountText();
+            deathText.SetText($"{deathPanelSo.deathText}");
         }
 
         private void SetCoinAmountText()

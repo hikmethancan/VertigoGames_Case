@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using _Main.Scripts.Base.MonoBehaviourBase;
 using _Main.Scripts.DataSystem.Concrete;
 using _Main.Scripts.GamePlay.Item.Abstract;
+using _Main.Scripts.GamePlay.Item.Concrete;
 using _Main.Scripts.PoolSystem.Abstract;
 using _Main.Scripts.Signals;
 using _Main.Scripts.UserInterface.RewardUI.Abstract;
@@ -40,10 +41,11 @@ namespace _Main.Scripts.UserInterface.RewardUI.Concrete
 
         private void CollectItems()
         {
-            var check = _rewardedItems.Any(x => x.ItemData.itemType == CardItemType.Gold);
-            if (!check) return;
-            var gold = _rewardedItems.FirstOrDefault(x => x.ItemData.itemType == CardItemType.Gold)!;
-            DataManager.Money += gold.RewardRewardCount;
+            var goldItem = _rewardedItems.FirstOrDefault(x => x.ItemData.itemType == CardItemType.Gold);
+            if (goldItem != null)
+            {
+                DataManager.Money += goldItem.RewardRewardCount;
+            }
         }
 
         private async void AddItem(ItemBase itemBase)
@@ -53,50 +55,67 @@ namespace _Main.Scripts.UserInterface.RewardUI.Concrete
 
         private async Task AddNewItem(ItemBase tempItem)
         {
-            if (CheckRewardedItemIsDeath(tempItem)) // Check for Death item type
+            if (CheckRewardedItemIsDeath(tempItem))
             {
                 GameSignals.OnDeathState?.Invoke();
                 return;
             }
 
-            ItemBase item = _rewardedItems.FirstOrDefault(x => x.IsEqualItemType(tempItem));
-
-            if (item == null)
+            var existingItem = GetExistingItem(tempItem);
+            if (existingItem == null)
             {
-                item = PoolManager.Instance.ItemPool.Get();
-                item.SetupItemData(tempItem.ItemData);
-                item.RewardedSetup();
-                Transform itemTransform = item.transform;
-                itemTransform.SetParent(container);
-                itemTransform.localScale = Vector3.one;
-                item.gameObject.SetActive(true);
-                _rewardedItems.Add(item);
+                existingItem = CreateNewItem(tempItem);
+                _rewardedItems.Add(existingItem);
             }
 
+            await HandleItemMovementAsync(tempItem, existingItem);
+            existingItem.IncreaseItemCount(tempItem.ItemData.spawnCount);
+            GameSignals.OnSwitchPhaseState?.Invoke();
+            GameSignals.OnItemRewardedFinish?.Invoke();
+        }
 
-            await Task.Delay(10); // Small delay to simulate asynchronous operation
+        private ItemBase GetExistingItem(ItemBase tempItem)
+        {
+            return _rewardedItems.FirstOrDefault(x => x.IsEqualItemType(tempItem));
+        }
 
-            List<Task> moveTasks = new List<Task>();
+        private ItemBase CreateNewItem(ItemBase tempItem)
+        {
+            var newItem = PoolManager.Instance.ItemPool.Get();
+            newItem.SetupItemData(tempItem.ItemData);
+            newItem.RewardedSetup();
+            Transform itemTransform = newItem.transform;
+            itemTransform.SetParent(container);
+            itemTransform.localScale = Vector3.one;
+            newItem.gameObject.SetActive(true);
+            return newItem;
+        }
+
+        private async Task HandleItemMovementAsync(ItemBase tempItem, ItemBase existingItem)
+        {
+            await Task.Delay(10); // Small delay to wait initialize of rewardedItem
+
+            var moveTasks = new List<Task>();
             for (int i = 0; i < rewardSo.rewardedItemsSpawnCount; i++)
             {
                 var itemParticle = PoolManager.Instance.RewardedItemPool.Get();
-                itemParticle.SetItem(item.ItemData.itemSprite);
-                Transform itemParticleTransform = itemParticle.transform;
-                itemParticleTransform.SetParent(transform);
-                itemParticleTransform.localScale = Vector3.one;
-                var rndVector = Random.insideUnitSphere * rewardSo.rewardItemsSpawnOffsetMultiplier;
-                var tempItemPos = tempItem.RectTransform.position;
-                itemParticleTransform.position = tempItemPos +
-                                                 new Vector3(rndVector.x, rndVector.y,
-                                                     tempItemPos.z);
-                itemParticle.gameObject.SetActive(true);
-                moveTasks.Add(itemParticle.MovementAsync(item.RectTransform.position));
+                SetupItemParticle(itemParticle, tempItem, existingItem);
+                moveTasks.Add(itemParticle.MovementAsync(existingItem.RectTransform.position));
             }
 
             await Task.WhenAll(moveTasks);
-            item.IncreaseItemCount(tempItem.ItemData.spawnCount);
-            GameSignals.OnSwitchPhaseState?.Invoke();
-            GameSignals.OnItemRewardedFinish?.Invoke();
+        }
+
+        private void SetupItemParticle(RewardedItemImage itemParticle, ItemBase tempItem, ItemBase existingItem)
+        {
+            itemParticle.SetItem(existingItem.ItemData.itemSprite);
+            Transform itemParticleTransform = itemParticle.transform;
+            itemParticleTransform.SetParent(transform);
+            itemParticleTransform.localScale = Vector3.one;
+            var rndVector = Random.insideUnitSphere * rewardSo.rewardItemsSpawnOffsetMultiplier;
+            var tempItemPos = tempItem.RectTransform.position;
+            itemParticleTransform.position = tempItemPos + new Vector3(rndVector.x, rndVector.y, tempItemPos.z);
+            itemParticle.gameObject.SetActive(true);
         }
 
         private bool CheckRewardedItemIsDeath(ItemBase item)

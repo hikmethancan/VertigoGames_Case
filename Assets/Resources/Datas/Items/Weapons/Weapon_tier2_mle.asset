@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Weapon_tier2_mle
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: bd581b99b04c8184799e3758050ccf68, type: 3}
-  itemType: 0
+  itemType: 4
+  chestType: 0
+  weaponType: 3
+  pointType: 0
   spawnCount: 1
   spawnPossibility: 20

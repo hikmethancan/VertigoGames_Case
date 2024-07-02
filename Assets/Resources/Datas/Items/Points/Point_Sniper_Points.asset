@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Point_Sniper_Points
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 806f4794ab91aa94394720279c3c75c4, type: 3}
-  itemType: 0
+  itemType: 5
+  chestType: 0
+  weaponType: 0
+  pointType: 6
   spawnCount: 0
   spawnPossibility: 0

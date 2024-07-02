@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Point_Knife_Points
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: fc5421fb6179b1048a50106ae1429afd, type: 3}
-  itemType: 0
+  itemType: 5
+  chestType: 0
+  weaponType: 0
+  pointType: 1
   spawnCount: 0
   spawnPossibility: 0

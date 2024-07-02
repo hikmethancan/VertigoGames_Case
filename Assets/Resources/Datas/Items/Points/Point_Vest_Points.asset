@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Point_Vest_Points
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: f0ef700e12e2b1e43b4779dec168cd41, type: 3}
-  itemType: 0
+  itemType: 5
+  chestType: 0
+  weaponType: 0
+  pointType: 8
   spawnCount: 0
   spawnPossibility: 0

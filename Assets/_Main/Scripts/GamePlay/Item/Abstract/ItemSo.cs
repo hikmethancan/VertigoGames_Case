@@ -16,7 +16,7 @@ namespace _Main.Scripts.GamePlay.Item.Abstract
         public WeaponType weaponType;
 
         [ShowIf("itemType", CardItemType.Point)]
-        public PointType pointerType;
+        public PointType pointType;
 
         [Space(10f)] public int spawnCount;
         [Range(0, 100)] public int spawnPossibility;

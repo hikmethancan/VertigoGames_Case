@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Weapon_tier3_shotgun
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 976191daa20f30b46a7b3064253a133f, type: 3}
-  itemType: 0
+  itemType: 4
+  chestType: 0
+  weaponType: 5
+  pointType: 0
   spawnCount: 1
   spawnPossibility: 20

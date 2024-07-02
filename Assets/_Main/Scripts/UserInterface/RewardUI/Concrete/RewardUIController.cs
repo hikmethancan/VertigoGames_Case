@@ -59,7 +59,7 @@ namespace _Main.Scripts.UserInterface.RewardUI.Concrete
                 return;
             }
 
-            ItemBase item = _rewardedItems.FirstOrDefault(x => x.ItemData.name == tempItem.ItemData.name);
+            ItemBase item = _rewardedItems.FirstOrDefault(x => x.IsEqualItemType(tempItem));
 
             if (item == null)
             {

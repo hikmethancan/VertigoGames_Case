@@ -3,12 +3,8 @@ using _Main.Scripts.GamePlay.Item.Abstract;
 
 namespace _Main.Scripts.Signals
 {
-    public static class GameSignals
+    public static partial class GameSignals
     {
-        //Spinning
-        public static Action OnSpinningButtonClicked;
-        public static Action OnReadyForSpinning;
-
         // Items
         public static Action<ItemBase> OnNewItemGained;
         public static Action OnDeathState;

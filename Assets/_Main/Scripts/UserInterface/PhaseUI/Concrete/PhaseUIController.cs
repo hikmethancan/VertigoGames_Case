@@ -33,7 +33,6 @@ namespace _Main.Scripts.UserInterface.PhaseUI.Concrete
 
             SortThePhaseAnimation();
         }
-
         protected override void Register(bool isActive)
         {
             base.Register(isActive);

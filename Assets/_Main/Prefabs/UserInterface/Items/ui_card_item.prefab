@@ -264,4 +264,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemImage: {fileID: 8604960449581499633}
   itemCountText: {fileID: 8452778972372622941}
-  itemType: 0

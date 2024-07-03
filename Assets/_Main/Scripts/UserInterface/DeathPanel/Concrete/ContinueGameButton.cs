@@ -8,11 +8,6 @@ namespace _Main.Scripts.UserInterface.DeathPanel.Concrete
     {
         private int _cost;
 
-        protected override void Register(bool isActive)
-        {
-            base.Register(isActive);
-        }
-
         protected override void OnButtonClicked()
         {
             Continue();
@@ -29,7 +24,6 @@ namespace _Main.Scripts.UserInterface.DeathPanel.Concrete
             {
                 return;
             }
-
             GameSignals.OnContinueButtonClicked?.Invoke();
             DataManager.Money -= _cost;
             GameSignals.OnSetCoinAmount?.Invoke();

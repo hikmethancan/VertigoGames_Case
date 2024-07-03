@@ -32,27 +32,18 @@ namespace _Main.Scripts.GamePlay.Item.Abstract
             PlaySpawnedAnimation();
         }
 
-        public bool IsEqualItemType(object obj)
+        public bool IsEqualItemType(ItemBase targetItem)
         {
-            if (obj is ItemBase other)
+            if (ItemData.itemType != targetItem.ItemData.itemType)
+                return false;
+
+            return ItemData.itemType switch
             {
-                if (ItemData.itemType != other.ItemData.itemType)
-                    return false;
-
-                switch (ItemData.itemType)
-                {
-                    case CardItemType.Chest:
-                        return ItemData.chestType == other.ItemData.chestType;
-                    case CardItemType.Weapon:
-                        return ItemData.weaponType == other.ItemData.weaponType;
-                    case CardItemType.Point:
-                        return ItemData.pointType == other.ItemData.pointType;
-                    default:
-                        return true; // For types like Cash, Gold, Death which don't have subtypes
-                }
-            }
-
-            return false;
+                CardItemType.Chest => ItemData.chestType == targetItem.ItemData.chestType,
+                CardItemType.Weapon => ItemData.weaponType == targetItem.ItemData.weaponType,
+                CardItemType.Point => ItemData.pointType == targetItem.ItemData.pointType,
+                _ => true
+            };
         }
 
 

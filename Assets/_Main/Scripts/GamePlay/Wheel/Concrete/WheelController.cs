@@ -18,7 +18,7 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
     {
         #region Publics
 
-        public WheelSo WheelSo => wheelSo;
+        public WheelSo WheelSo => _wheelSo;
         public WheelAnimations WheelAnimations => _wheelAnimations;
 
         #endregion
@@ -26,8 +26,6 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
 
         #region SerializeFields
 
-        [SerializeField] private WheelSo wheelSo;
-        [SerializeField] private WheelAnimationSo wheelAnimationSo;
         [SerializeField] private SpinningButton spinButton;
         [SerializeField] private ItemBase itemPrefab;
         [SerializeField] private Image wheelImage;
@@ -39,6 +37,8 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
 
         #region Privates
 
+        private WheelSo _wheelSo;
+        private WheelAnimationSo _wheelAnimationSo;
         private WheelAnimations _wheelAnimations;
         private WheelStateManager _wheelStateManager;
         private WheelPhaseSo _currentPhaseSo;
@@ -51,9 +51,17 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
 
         protected override void Setup()
         {
+            SetupWheelSoDatas();
             _currentPhaseLevel = 1;
-            _wheelAnimations = new WheelAnimations(transform, wheelAnimationSo, this);
+            _wheelAnimations = new WheelAnimations(transform, _wheelAnimationSo, this);
             TryGetComponent(out _wheelStateManager);
+        }
+
+        private void SetupWheelSoDatas()
+        {
+            var datas = DIContainer.Instance.GetWheelDatas();
+            _wheelSo = datas.wheelSo;
+            _wheelAnimationSo = datas.wheelAnimationSo;
         }
 
         protected override void Register(bool isActive)
@@ -160,10 +168,10 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
 
             _currentItems.Clear();
             float angleStep = 360f / 8;
-            for (int i = 0; i < wheelSo.howManyItemsWillSpawn; i++)
+            for (int i = 0; i < _wheelSo.howManyItemsWillSpawn; i++)
             {
                 float angle = i * angleStep;
-                Vector3 position = CalculateItemsSpawnPosition(angle, wheelSo.cardSpawnRadius);
+                Vector3 position = CalculateItemsSpawnPosition(angle, _wheelSo.cardSpawnRadius);
                 var item = PoolManager.Instance.ItemPool.Get();
                 Transform itemTransform;
                 (itemTransform = item.transform).SetParent(itemsSpawnParent);

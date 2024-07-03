@@ -18,4 +18,4 @@ MonoBehaviour:
   weaponType: 0
   pointType: 0
   spawnCount: 1
-  spawnPossibility: 15
+  spawnPossibility: 11

@@ -1,6 +1,8 @@
  <h1>Vertigo Games Case</h1>
 
-<img src="" height ="500" width="1200">
+<h2>Short Video Link</h2>
+<p>https://youtu.be/96hkJ1bdcxE</p>
+
  <br/>
 <br/>
 <br/>

@@ -1,5 +1,6 @@
 using System;
 using _Main.Scripts.GamePlay.Item.Abstract;
+using _Main.Scripts.GamePlay.Wheel.Abstract;
 
 namespace _Main.Scripts.Signals
 {
@@ -13,6 +14,7 @@ namespace _Main.Scripts.Signals
         // Phase
         public static Action OnSwitchPhaseState;
         public static Action<bool> OnExitButtonActivate;
+        public static Action<int,WheelType> OnNewPhaseSwitched;
 
         // Button Events
         public static Action OnContinueButtonClicked;

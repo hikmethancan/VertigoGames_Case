@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace _Main.Scripts.UserInterface.PhaseUI.Abstract
 {
-    [CreateAssetMenu(fileName = "Datas", menuName = "Datas/PhaseSo", order = 0)]
+    [CreateAssetMenu(fileName = "Datas", menuName = "Datas/PhaseAnimationSo", order = 0)]
     public class PhaseAnimationSo : ScriptableObject
     {
         public float phaseImageSpawnOffsetX;

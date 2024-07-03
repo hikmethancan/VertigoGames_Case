@@ -43,6 +43,7 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
         private WheelStateManager _wheelStateManager;
         private WheelPhaseSo _currentPhaseSo;
         private List<ItemBase> _currentItems = new();
+        private WheelType _currentWheelType;
         private int _currentPhaseLevel;
 
         #endregion
@@ -61,13 +62,19 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
             if (isActive)
             {
                 GameSignals.OnSpinningButtonClicked += BeginWheelSpinning;
-                GameSignals.OnSwitchPhaseState += IncreasePhaseLevel;
+                GameSignals.OnNewPhaseSwitched += ChangePhase;
             }
             else
             {
                 GameSignals.OnSpinningButtonClicked -= BeginWheelSpinning;
-                GameSignals.OnSwitchPhaseState -= IncreasePhaseLevel;
+                GameSignals.OnNewPhaseSwitched -= ChangePhase;
             }
+        }
+
+        private void ChangePhase(int phaseLevel, WheelType type)
+        {
+            _currentPhaseLevel = phaseLevel;
+            _currentWheelType = type;
         }
 
         private void BeginWheelSpinning()
@@ -85,11 +92,8 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
         public void SetupWheelData()
         {
             ResetWheelRotation();
-            WheelType wheelType = WheelType.Bronze;
-            if (_currentPhaseLevel == 5)
-                wheelType = WheelType.Silver;
             _currentPhaseSo = ScriptableObject.CreateInstance<WheelPhaseSo>();
-            _currentPhaseSo = DIContainer.Instance.GetWheelPhaseData(wheelType);
+            _currentPhaseSo = DIContainer.Instance.GetWheelPhaseData(_currentWheelType);
             wheelImage.sprite = _currentPhaseSo.wheelSprite;
             indicatorImage.sprite = _currentPhaseSo.indicatorSprite;
             CreateNewItems();
@@ -169,7 +173,6 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
                 item.gameObject.SetActive(true);
                 item.SetupItemData(GetItem());
                 _currentItems.Add(item);
-                
             }
         }
 

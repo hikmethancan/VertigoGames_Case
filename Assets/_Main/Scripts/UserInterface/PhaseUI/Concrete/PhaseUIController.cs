@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using _Main.Scripts.Base.MonoBehaviourBase;
+using _Main.Scripts.GamePlay.Wheel.Abstract;
 using _Main.Scripts.PoolSystem.Abstract;
 using _Main.Scripts.Signals;
 using _Main.Scripts.UserInterface.PhaseUI.Abstract;
@@ -14,6 +15,7 @@ namespace _Main.Scripts.UserInterface.PhaseUI.Concrete
         [SerializeField] private RectTransform container;
         [SerializeField] private PhaseAnimationSo phaseAnimationSo;
         [SerializeField] private PhaseReferencesSo phaseReferencesSo;
+        [SerializeField] private PhaseSo phaseSo;
         [SerializeField] private Image currentPhaseBgImage;
 
         private readonly List<PhaseUI> _currentPhases = new();
@@ -33,6 +35,7 @@ namespace _Main.Scripts.UserInterface.PhaseUI.Concrete
 
             SortThePhaseAnimation();
         }
+
         protected override void Register(bool isActive)
         {
             base.Register(isActive);
@@ -59,7 +62,7 @@ namespace _Main.Scripts.UserInterface.PhaseUI.Concrete
 
         private void SwitchPhase()
         {
-            if (_currentPhaseLevel == 30)
+            if (_currentPhaseLevel == phaseSo.superZoneNo)
                 _currentPhaseLevel = 0;
             _currentPhaseLevel++;
             SortThePhaseAnimation();
@@ -68,12 +71,21 @@ namespace _Main.Scripts.UserInterface.PhaseUI.Concrete
 
         private void CheckPhaseStates()
         {
-            currentPhaseBgImage.sprite = _currentPhaseLevel switch
+            if (_currentPhaseLevel % phaseSo.superZoneNo == 0)
             {
-                5 => phaseReferencesSo.silverLevelSprite,
-                30 => phaseReferencesSo.superZoneLevelSprite,
-                _ => phaseReferencesSo.bronzeLevelSprite
-            };
+                currentPhaseBgImage.sprite = phaseReferencesSo.superZoneLevelSprite;
+                GameSignals.OnNewPhaseSwitched?.Invoke(_currentPhaseLevel, WheelType.Gold);
+            }
+            else if (_currentPhaseLevel % phaseSo.safeZoneNo == 0)
+            {
+                currentPhaseBgImage.sprite = phaseReferencesSo.silverLevelSprite;
+                GameSignals.OnNewPhaseSwitched?.Invoke(_currentPhaseLevel, WheelType.Silver);
+            }
+            else
+            {
+                currentPhaseBgImage.sprite = phaseReferencesSo.bronzeLevelSprite;
+                GameSignals.OnNewPhaseSwitched?.Invoke(_currentPhaseLevel, WheelType.Bronze);
+            }
         }
     }
 }

@@ -33,7 +33,6 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete.States
                 GameSignals.OnItemRewardedFinish -= SetupToNextPhase;
             }
         }
-        
 
         private void SetupToNextPhase()
         {

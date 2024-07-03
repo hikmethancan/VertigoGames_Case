@@ -147,6 +147,7 @@ MonoBehaviour:
   container: {fileID: 2873789170726397779}
   phaseAnimationSo: {fileID: 11400000, guid: ad25604d450a0fe4ab59666c7b922550, type: 2}
   phaseReferencesSo: {fileID: 11400000, guid: 1ecbbb303ecce481aacb347c1fa49fb7, type: 2}
+  phaseSo: {fileID: 11400000, guid: b0d2fedc11fd44943995685a4b1f2ab7, type: 2}
   currentPhaseBgImage: {fileID: 225238074740087933}
 --- !u!1 &3183112790986418083
 GameObject:

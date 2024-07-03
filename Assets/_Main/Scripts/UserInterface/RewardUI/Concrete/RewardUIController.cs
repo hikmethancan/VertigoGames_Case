@@ -82,12 +82,13 @@ namespace _Main.Scripts.UserInterface.RewardUI.Concrete
         private ItemBase CreateNewItem(ItemBase tempItem)
         {
             var newItem = PoolManager.Instance.ItemPool.Get();
+            newItem.gameObject.SetActive(true);
             newItem.SetupItemData(tempItem.ItemData);
             newItem.RewardedSetup();
             Transform itemTransform = newItem.transform;
             itemTransform.SetParent(container);
             itemTransform.localScale = Vector3.one;
-            newItem.gameObject.SetActive(true);
+            
             return newItem;
         }
 

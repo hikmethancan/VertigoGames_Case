@@ -1,3 +1,4 @@
+using System;
 using _Main.Scripts.Base.MonoBehaviourBase;
 using DG.Tweening;
 using TMPro;
@@ -22,7 +23,8 @@ namespace _Main.Scripts.GamePlay.Item.Abstract
             _rectTransform ? _rectTransform : (_rectTransform = GetComponent<RectTransform>());
 
         private RectTransform _rectTransform;
-
+        private float _initWidthValue;
+        private float _initHeightValue;
         private int _count;
         public int RewardRewardCount => _count;
 
@@ -30,6 +32,15 @@ namespace _Main.Scripts.GamePlay.Item.Abstract
         {
             base.OnEnable();
             PlaySpawnedAnimation();
+            
+        }
+
+        protected override void Awake()
+        {
+            base.Awake();
+            var rect = itemImage.rectTransform.rect;
+            _initWidthValue = rect.width;
+            _initHeightValue = rect.height;
         }
 
         public bool IsEqualItemType(ItemBase targetItem)
@@ -56,7 +67,32 @@ namespace _Main.Scripts.GamePlay.Item.Abstract
             itemImage.sprite = itemSo.itemSprite;
             _count = itemSo.spawnCount;
             _itemSo = itemSo;
+            CheckIfTypeDeath();
             SetItemCountText();
+        }
+
+        private void StretchImage(bool isDeath)
+        {
+            var rectTransform = itemImage.rectTransform;
+            if (isDeath)
+            {
+                rectTransform.sizeDelta = new Vector2(100f, 100f);
+            }
+            else
+            {
+                rectTransform.sizeDelta = new Vector2(_initWidthValue, _initHeightValue);
+            }
+        }
+        private void CheckIfTypeDeath()
+        {
+            bool isDeathType = _itemSo.itemType == CardItemType.Death;
+            ActivateCountText(isDeathType);
+            StretchImage(isDeathType);
+        }
+
+        private void ActivateCountText(bool activate)
+        {
+            itemCountText.gameObject.SetActive(!activate);
         }
 
         private void SetItemCountText()

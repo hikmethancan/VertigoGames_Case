@@ -84,6 +84,7 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
 
         public void SetupWheelData()
         {
+            ResetWheelRotation();
             WheelType wheelType = WheelType.Bronze;
             if (_currentPhaseLevel == 5)
                 wheelType = WheelType.Silver;
@@ -118,6 +119,11 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
             }
 
             return default(WheelSpinResultData);
+        }
+
+        private void ResetWheelRotation()
+        {
+            transform.eulerAngles = Vector3.zero;
         }
 
         private ItemSo GetItem()
@@ -158,11 +164,12 @@ namespace _Main.Scripts.GamePlay.Wheel.Concrete
                 Transform itemTransform;
                 (itemTransform = item.transform).SetParent(itemsSpawnParent);
                 item.RectTransform.anchoredPosition = position;
-                itemTransform.localEulerAngles = Vector3.forward * (angle-90f);
+                itemTransform.localEulerAngles = Vector3.forward * (angle - 90f);
                 itemTransform.localScale = Vector3.one;
+                item.gameObject.SetActive(true);
                 item.SetupItemData(GetItem());
                 _currentItems.Add(item);
-                item.gameObject.SetActive(true);
+                
             }
         }
 

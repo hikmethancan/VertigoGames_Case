@@ -16,6 +16,6 @@ MonoBehaviour:
   itemType: 2
   chestType: 0
   weaponType: 0
-  pointerType: 0
+  pointType: 0
   spawnCount: 1
-  spawnPossibility: 10
+  spawnPossibility: 15
